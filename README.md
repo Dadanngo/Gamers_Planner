@@ -34,7 +34,7 @@
 
 　活動日一覧をDiscordの「webhook」、LINEの「LINE Messaging」 経由でリマインド機能として通知。 
 
-　日程変更は主催者が作成したURLリンクから編集する。
+　日程変更は主催者が作成したURLリンクから編集。
 
 ## ■ ユーザーの獲得について
 ユーザーからのフィードバックを問い合わせフォームで収集し、サービスに反映することで、
@@ -70,5 +70,4 @@
 -  LINE連携　→　LINE Messaging API
 -  DISCORD連携 →　webhook
 -  通知機能の実装　→　WebSocket、 ActionCable（Rails標準）
-
 
