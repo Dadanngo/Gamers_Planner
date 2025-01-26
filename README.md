@@ -123,3 +123,5 @@ Figma：https://www.figma.com/design/qZTFAiLOH5aGPKNGJSBp0W/%E7%94%BB%E9%9D%A2%E
 画面遷移だけでなく、必要なボタンやフォームが確認できるくらい作り込めているか？
 - [✔] 作り込みはある程度完了している（Figmaを見て画面の作成ができる状態にある）
 
+### ER図
+drawio: https://app.diagrams.net/?lang=ja#G100g26hi8TETFZ2gDkguFO0ltgTupikJM#%7B%22pageId%22%3A%22C5RBs43oDa-KdzZeNtuy%22%7D
