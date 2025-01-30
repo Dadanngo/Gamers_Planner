@@ -1,0 +1,27 @@
+services:
+  backend:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+     - postgres_volume:/var/lib/postgresql/data
+    networks:
+      - back-tier
+  frontend:
+    build: .
+    command: bash -c "bundle e rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - .:/myapp
+    networks:
+      - front-tier
+      - back-tier
+volumes:
+  postgres_volume:
+networks:
+  front-tier: {}
+  back-tier: {}
