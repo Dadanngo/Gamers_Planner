@@ -6,7 +6,6 @@
 @tailwind utilities;
 /*背景をデフォルトに設定*/
 .bg-custom {
-  background-image: url('/assets/back_ground.webp');
   background-size: cover;
   background-position: center;
 }
