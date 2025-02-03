@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        mplus: ['M PLUS 1p', 'serif',]
+        mplus: ['M PLUS 1p', 'serif'],
+        Rajdhani: ['Rajdhani', 'selif']
       },
       animation: {
         "scale-up-hor-left": "scale-up-hor-left 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both"
