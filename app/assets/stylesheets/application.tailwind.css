@@ -10,3 +10,18 @@
   background-size: cover;
   background-position: center;
 }
+
+/* フッターをページの下側に固定 */
+.footer-fixed {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+/* 下矢印をホバー */
+.svg-hover-animation {
+  transition: transform 0.3s ease;
+}
+
+.svg-hover-animation:hover {
+  transform: translateY(5px);
+}
