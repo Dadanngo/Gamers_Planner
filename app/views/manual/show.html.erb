@@ -1,0 +1,60 @@
+<div style="background-image: url('<%= asset_path("back_ground.webp") %>');" class="bg-custom min-h-screen flex flex-col items-center pt-10 font-mplus">
+  <div class="divide-y bg-white w-full max-w-6xl mx-auto p-8 overflow-y-auto" style="max-height: calc(100vh - 160px);">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div class="flex flex-col justify-center text-center lg:text-left lg:col-span-3">
+        <div class="flex items-center justify-start">
+          <span class="text-xl font-bold md:text-2xl">主催者の方</span>
+          <%= link_to manual_show_path(button1: true), method: :get, class: 'ml-4 p-0 border-0 bg-transparent' do %>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="svg-hover-animation cursor-pointer" name="button1">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M11.9997 13.1716L7.04996 8.22186L5.63574 9.63607L11.9997 16L18.3637 9.63607L16.9495 8.22186L11.9997 13.1716Z" fill="rgba(28,28,30,1)"></path>
+            </svg>
+          <% end %>
+        </div>
+        <% if @show_details_1 %>
+          <span class="mt-4 text-black">1.<a href="#" class="text-blue-500 underline">予定を立てる</a>を押し、STEP1をプルダウンから選択してください。</span>
+          <span class="mt-4 text-black">2.次にカレンダーから候補日にしたい日付を選択し、開始時間を編集してください。日程候補から指定した日付を確認可能（複数選択可能です）</span>
+          <span class="mt-4 text-black">3.登録をボタンを押すとURLが出力されますので、参加者へ送信してください。</span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div class="flex flex-col justify-center text-center lg:text-left lg:col-span-3">
+        <div class="flex items-center justify-start">
+          <span class="text-xl font-bold md:text-2xl">参加者の方</span>
+          <%= link_to manual_show_path(button2: true), method: :get, class: 'ml-4 p-0 border-0 bg-transparent' do %>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="svg-hover-animation cursor-pointer" name="button1">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M11.9997 13.1716L7.04996 8.22186L5.63574 9.63607L11.9997 16L18.3637 9.63607L16.9495 8.22186L11.9997 13.1716Z" fill="rgba(28,28,30,1)"></path>
+            </svg>
+          <% end %>
+        </div>
+        <% if @show_details_2 %>
+          <span class="mt-4 text-black">1.プレイヤー名とジョブ名をプルダウンから選択して下さい。</span>
+          <span class="mt-4 text-black">2.日程候補から自分の活動可能日程を選択して下さい。</span>
+          <span class="mt-4 text-black">3.登録ボタンを押すと、日程入力完了です。予定を変更したい場合は、作成された予定表から編集してください。</span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div class="flex flex-col justify-center text-center lg:text-left lg:col-span-3">
+        <div class="flex items-center justify-start">
+          <span class="text-xl font-bold md:text-2xl">DISCORD通知方法</span>
+          <%= link_to manual_show_path(button3: true), method: :get, class: 'ml-4 p-0 border-0 bg-transparent' do %>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="svg-hover-animation cursor-pointer" name="button1">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M11.9997 13.1716L7.04996 8.22186L5.63574 9.63607L11.9997 16L18.3637 9.63607L16.9495 8.22186L11.9997 13.1716Z" fill="rgba(28,28,30,1)"></path>
+            </svg>
+          <% end %>
+        </div>
+        <% if @show_details_3 %>
+          <span class="mt-4 text-black">1.<a href="#" class="text-blue-500 underline">下部プルダウンからBotを連携するボタンを押し</a>、DICORDで通知したいサーバーを選択して下さい。</span>
+          <span class="mt-4 text-black">2.予定表から全員の入力を確認後に、DISCORDで通知ボタンを押してください。</span>
+          <span class="mt-4 text-black">3.活動日当日の17時にサーバー内で活動日のリマインドがされます!</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
