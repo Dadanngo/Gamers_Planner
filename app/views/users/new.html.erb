@@ -1,11 +1,14 @@
-<% content_for :title, "New user" %>
+<div style="background-image: url('<%= asset_path("back_ground.webp") %>');" class="bg-custom min-h-screen flex flex-col items-center pt-10 font-mplus">
+  <div class="divide-y bg-white w-full max-w-6xl mx-auto p-8 overflow-y-auto" style="max-height: calc(100vh - 160px);"> 
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+      <h2 class="mt-6 text-3xl font-extrabold text-center text-black">新規登録</h2>
+    </div>
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div class="px-4 py-8 sm:px-10 text-sm font-medium">
 
-<h1>New user</h1>
+        <%= render "form", user: @user %>
 
-<%= render "form", user: @user %>
-
-<br>
-
-<div>
-  <%= link_to "Back to users", users_path %>
+     </div>
+    </div>
+  </div>
 </div>

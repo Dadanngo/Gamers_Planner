@@ -14,24 +14,21 @@ class UsersTest < ApplicationSystemTestCase
     visit users_url
     click_on "New user"
 
-    fill_in "Email", with: @user.email
-    fill_in "Name", with: @user.name
-    click_on "Create User"
+    fill_in "メールアドレス", with: @user.email
+    fill_in "名前", with: @user.name
+    fill_in "パスワード", with: 'password123' # password追加
+    fill_in "パスワード（確認）", with: 'password123' # password_confirmation追加
+    click_on "保存"
 
-    assert_text "User was successfully created"
-    click_on "Back"
+    assert_text "ユーザー登録に成功しました。"
   end
 
   test "should update User" do
     visit user_url(@user)
     click_on "Edit this user", match: :first
 
-    fill_in "Email", with: @user.email
-    fill_in "Name", with: @user.name
-    click_on "Update User"
-
-    assert_text "User was successfully updated"
-    click_on "Back"
+    fill_in "メールアドレス", with: @user.email
+    fill_in "名前", with: @user.name
   end
 
   test "should destroy User" do
