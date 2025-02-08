@@ -16,6 +16,8 @@ class UsersTest < ApplicationSystemTestCase
 
     fill_in "Email", with: @user.email
     fill_in "Name", with: @user.name
+    fill_in "Password", with: 'password123' # password追加
+    fill_in "Password confirmation", with: 'password123' # password_confirmation追加
     click_on "Create User"
 
     assert_text "User was successfully created"
