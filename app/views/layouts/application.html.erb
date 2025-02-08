@@ -15,11 +15,24 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
   </head>
 
   <body>
+  <% if flash[:notice] %>
+    <div class="p-4 mb-4 text-sm rounded-lg border text-green-800 bg-green-50 border-green-300 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
+    <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <% if flash[:warning] %>
+    <div class="p-4 mb-4 text-sm rounded-lg border text-red-800 bg-red-50 border-red-300 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+    <%= flash[:warning] %>
+    </div>
+  <% end %>
+
     <%= render 'shared/header' %>
     <%= yield %>
     <%= render 'shared/footer' %>
+    <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   </body>
 </html>
