@@ -5,36 +5,23 @@ class UsersTest < ApplicationSystemTestCase
     @user = users(:one)
   end
 
-  test "visiting the index" do
-    visit users_url
-    assert_selector "h1", text: "Users"
-  end
-
-  test "should create user" do
-    visit users_url
-    click_on "New user"
-
-    fill_in "メールアドレス", with: @user.email
-    fill_in "名前", with: @user.name
-    fill_in "パスワード", with: 'password123' # password追加
-    fill_in "パスワード（確認）", with: 'password123' # password_confirmation追加
+  test "ログイン" do
+    user = User.create(email: 'test@example.com', password: 'password')
+    visit new_login_url
+    fill_in "メールアドレス", with: user.email
+    fill_in "パスワード", with: user.password
     click_on "保存"
 
-    assert_text "ユーザー登録に成功しました。"
+    assert_text "ログインしました"
   end
 
-  test "should update User" do
-    visit user_url(@user)
-    click_on "Edit this user", match: :first
+  test "新規登録" do
+    visit new_users_url
+    fill_in "名前", with: "Test User"
+    fill_in "メールアドレス", with: "test@example.com"
+    fill_in "パスワード", with: 'password123'
+    fill_in "パスワード（確認）", with: 'password123'
+    click_on "保存"
 
-    fill_in "メールアドレス", with: @user.email
-    fill_in "名前", with: @user.name
+    assert_text "新規登録に成功しました"
   end
-
-  test "should destroy User" do
-    visit user_url(@user)
-    click_on "Destroy this user", match: :first
-
-    assert_text "User was successfully destroyed"
-  end
-end
