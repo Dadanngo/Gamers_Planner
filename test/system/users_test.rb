@@ -13,13 +13,13 @@ class UsersTest < ApplicationSystemTestCase
     visit new_login_url
     fill_in "メールアドレス", with: user.email
     fill_in "パスワード", with: password
-    click_on "保存"
+    click_on "ログイン"
 
     assert_text "ログインしました"
   end
 
   test "新規登録" do
-    visit new_users_url
+    visit new_user_url
     fill_in "名前", with: "Test User"
     fill_in "メールアドレス", with: "test@example.com"
     fill_in "パスワード", with: 'password123'
