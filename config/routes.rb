@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resource :login, only: %i[ new create ]
   resource :logout, only: %i[ show ]
+  resources :profiles, only: [ :show ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'manual/show', to: 'manual#show', as: 'manual_show'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

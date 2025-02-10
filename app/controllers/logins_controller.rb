@@ -3,15 +3,13 @@ class LoginsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:email])
-
-    if user&.authenticate_password(params[:password])
-      session[:user_id] = user.id
-      flash[:notice] = "ログインしました"
-      redirect_to users_path
-    else
-      flash.now[:warning] = 'ログインできませんでした'
-      render :new, status: :unprocessable_entity
-    end
+    @user = login(params[:email], params[:password])
+      if @user
+        flash[:notice] = "ログインしました"
+        redirect_to profile_path(@user)
+      else
+        flash.now[:warning] = "ログインできませんでした"
+        render :new, status: :unprocessable_entity
+      end
   end
 end
