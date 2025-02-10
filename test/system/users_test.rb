@@ -7,8 +7,7 @@ class UsersTest < ApplicationSystemTestCase
 
   test "ログイン" do
     password = "password123"
-    user = User.new(email: 'test@example.com', password: password)
-    user.save
+    user = User.create(email: 'test@example.com', password: password)
 
     visit new_login_url
     fill_in "メールアドレス", with: user.email
