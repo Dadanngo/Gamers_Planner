@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_login, except: [:new, :create, :show] 
-  skip_before_action :require_login, only: [:new, :create]
+  before_action :require_login, except: [ :new, :create, :show ]
+  skip_before_action :require_login, only: [ :new, :create ]
 
   # GET /users or /users.json
   def index
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       if @user.save
         auto_login(@user)
         flash[:notice] = "新規登録に成功しました"
-        format.html { redirect_to profile_path(@user)}
+        format.html { redirect_to profile_path(@user) }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -76,7 +76,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
-    
     # ログインしていない場合、ログイン画面にリダイレクト
     def not_authenticated
       flash[:warning] = "ログインが必要です"
