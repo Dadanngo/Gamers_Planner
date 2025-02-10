@@ -6,12 +6,11 @@ class UsersTest < ApplicationSystemTestCase
   end
 
   test "ログイン" do
-    password = "password123"
-    user = User.create(email: 'test@example.com', password: password)
+    user = User.create(email: 'test@example.com', name: 'test_user', password: 'password123', password_confirmation: 'password123')
 
     visit new_login_url
     fill_in "メールアドレス", with: user.email
-    fill_in "パスワード", with: password
+    fill_in "パスワード", with: 'password123'
     click_on "ログイン"
 
     assert_text "ログインしました"
