@@ -9,8 +9,9 @@
     <br>
     <br>
     <div class="flex justify-end">
-      <button class="relative h-12 overflow-hidden rounded bg-orange-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2">
-        <span class="relative font-mplus">>予定を立てる</span>
+      <%= link_to new_event_path, class: 'relative h-12 overflow-hidden rounded bg-orange-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
+      <span class="relative font-mplus">予定を立てる</span>
+      <% end %>
       </button>
     </div>
   </div>

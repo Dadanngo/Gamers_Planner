@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
+  has_many :events
   validates :name, presence: true
   validates :email, presence: true
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
