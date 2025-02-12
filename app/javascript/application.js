@@ -1,14 +1,16 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
 import "./controllers"
+import { initializeCalendar } from './calendar';
 
 document.addEventListener("turbo:load", function() {
     // Flowbiteの機能を適用
     if (typeof initFlowbite === "function") {
         initFlowbite();
     }
-});
+    // カレンダーの初期化
+    initializeCalendar();
 
-document.addEventListener("turbo:load", function() {
+    // Tailwind CSSのクラスを追加
     document.documentElement.classList.add('tailwind-loaded');
 });

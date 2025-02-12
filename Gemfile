@@ -59,3 +59,4 @@ group :test do
 end
 
 gem 'sorcery', '0.16.3'
+gem 'fullcalendar-rails'

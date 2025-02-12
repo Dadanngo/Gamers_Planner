@@ -1,0 +1,53 @@
+<div style="background-image: url('<%= asset_path("back_ground.webp") %>');" class="bg-custom min-h-screen flex flex-col pt-5 font-mplus">
+  <div class="divide-y bg-white w-full max-w-6xl mx-auto p-8 overflow-y-auto" style="max-height: calc(100vh - 160px);">
+    <div class="flex flex-col md:flex-row">
+      <div class="w-full md:w-1/2 pr-4">
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-left">STEP1.予定を立てる</h2>
+        <%= form_with(model: @event, local: true) do |form| %>
+          <div class="grid grid-cols-1 gap-3">
+            <div class="mb-4">
+              <%= form.label :name, 'イベント名', class: "block text-2xl text-left" %>
+              <%= form.text_field :name, placeholder: "イベント名を入力してください", class: "w-full p-3 border border-black rounded-lg" %>
+            </div>
+
+            <div class="mb-4">
+              <%= form.label :game_id, 'プレイするゲーム(候補にない場合は未入力)', class: "block text-2xl text-left" %>
+              <%= form.select :game_id, options_for_select(Game.all.map { |game| [game.title, game.id] }), { prompt: '未選択' }, class: "w-full p-3 border border-black rounded-lg" %>
+            </div>
+
+            <div class="mb-4">
+              <%= form.label :data_center_id, '活動データセンター（FF14）', class: "block text-2xl text-left" %>
+              <%= form.select :data_center_id, options_for_select(DataCenter.all.map { |dc| [dc.name, dc.id] }), { prompt: '未選択' }, class: "w-full p-3 border border-black rounded-lg" %>
+            </div>
+
+            <div class="mb-4">
+              <%= form.label :hunter_id, 'ハンターID(モンハン)', class: "block text-2xl text-left" %>
+              <%= form.text_field :hunter_id, placeholder: "未入力可", class: "w-full p-3 border border-black rounded-lg" %>
+            </div>
+
+            <div class="mb-4">
+              <%= form.label :lobby_id, 'ロビーID（モンハン）', class: "block text-2xl text-left" %>
+              <%= form.text_field :lobby_id, placeholder: "未入力可", class: "w-full p-3 border border-black rounded-lg" %>
+            </div>
+          </div>
+      </div>
+
+      <div class="w-full md:w-1/2 pl-4">
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-left">STEP2.日付を選択</h2>
+        <div id="calendar" class="mb-6">
+          <!-- カレンダー表示のためのコードをここに追加 -->
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-left">日程候補</h2>
+        <div id="date_candidates" class="grid grid-cols-1 gap-3">
+          <!-- 日程候補を表示するためのコードをここに追加 -->
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-3 text-right">
+      <%= form.submit '登録', class: "p-3 bg-orange-400 text-white font-bold rounded-lg hover:bg-orange-500" %>
+    </div>
+    <% end %>
+  </div>
+</div>
