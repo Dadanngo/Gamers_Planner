@@ -14,4 +14,3 @@ DataCenter.find_or_create_by!(name: 'elemental', game: ff14)
 DataCenter.find_or_create_by!(name: 'gaia', game: ff14)
 DataCenter.find_or_create_by!(name: 'mana', game: ff14)
 DataCenter.find_or_create_by!(name: 'meteor', game: ff14)
-

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_12_115537) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_13_075108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_115537) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "schedule_inputs", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "token", null: false
+    t.string "job"
+    t.string "comment"
+    t.string "player_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_schedule_inputs_on_event_id"
+    t.index ["token"], name: "index_schedule_inputs_on_token", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -63,4 +75,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_115537) do
   add_foreign_key "events", "data_centers"
   add_foreign_key "events", "games"
   add_foreign_key "events", "users"
+  add_foreign_key "schedule_inputs", "events"
 end

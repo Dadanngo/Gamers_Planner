@@ -1,0 +1,18 @@
+<div class="flex items-center justify-center min-h-screen font-mplus">
+  <div class="bg-white w-full max-w-6xl mx-auto mt-[-380px] overflow-y-auto" style="max-height: calc(100vh - 160px);">
+    <h2 class="text-2xl font-bold text-left">参加者用の予定表が作成されました。</h2>
+    <h2 class="text-2xl font-bold text-left">以下のURLで予定表を共有しましょう!</h2>
+    <br>
+    <div class="border border-black text-black p-4 rounded-lg mb-4">
+     <%#= トークンからURLとクエリパラメータ付与して生成 %>  
+        <a href="<%= event_by_url_url(@event.url) %>?token=<%= @schedule_input.token %>">
+          <%= event_by_url_url(@event.url) %>?token=<%= @schedule_input.token %>
+        </a>
+    </div>
+      <div class="flex justify-center">
+        <%= link_to new_event_path, class: 'relative h-12 overflow-hidden rounded bg-orange-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
+          <span class="relative font-mplus">予定表表示</span>
+        <% end %>
+      </div>
+  </div>
+</div>
