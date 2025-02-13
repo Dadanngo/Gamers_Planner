@@ -3,4 +3,3 @@ class RemoveNotNullConstraintFromGameId < ActiveRecord::Migration[6.0]
     change_column_null :events, :game_id, true
   end
 end
-
