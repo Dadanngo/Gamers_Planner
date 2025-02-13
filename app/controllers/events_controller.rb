@@ -25,6 +25,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :game_id, :data_center_id, :hunter_id, :lobby_id, event_times_attributes: [ :start_time ])
+    params.require(:event).permit(:name, :game_id, :data_center_id, :hunter_id, :lobby_id, event_times_attributes: [:start_time])
   end
 end
