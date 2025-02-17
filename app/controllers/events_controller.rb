@@ -7,33 +7,45 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.user = current_user if current_user.present?
-
     # 主催者のURLランダム作成
     @event.url = SecureRandom.hex(10) unless @event.url.present?
-
     if params[:event][:start_times].present?
       params[:event][:start_times].each do |start_time_str|
         @event.event_times.create(start_time: DateTime.strptime(start_time_str, '%m/%d (%a) %H時'))
       end
     end
-
     if @event.save
-      # イベント作成後、共有用のtokenを作成
+      # スケジュール入力を作成
       @schedule_input = ScheduleInput.create(
-      event_id: @event.id,
-      token: SecureRandom.hex(16)  # トークンの生成
-    )
-    redirect_to event_by_url_url(@event.url, token: @schedule_input.token), notice: '作成完了'
+        event_id: @event.id,
+        token: SecureRandom.hex(16)  # トークンの生成
+      )
+      # ここで保存成功/失敗のログを出す
+      if @schedule_input.persisted?
+        Rails.logger.debug "ScheduleInput created successfully: #{@schedule_input.inspect}"
+        redirect_to event_by_url_url(@event.url, token: @schedule_input.token), notice: '作成完了'
+      else
+        Rails.logger.error "ScheduleInput creation failed: #{@schedule_input.errors.full_messages}"
+        flash[:alert] = "スケジュール入力の作成に失敗しました。"
+        redirect_to root_path
+      end
     else
       render :new
     end
   end
 
   def show
-    # 表示用URLトークン取得
     @event = Event.find_by(url: params[:url])
-    # 拡散用URLのトークンを取得
-    @schedule_input = ScheduleInput.find_by(token: params[:token]) if params[:token].present?
+    if params[:token].present?
+      @schedule_input = ScheduleInput.find_by(token: params[:token])
+    else
+      @schedule_input = ScheduleInput.where(event_id: @event.id).first
+    end
+
+    if @schedule_input.nil?
+      flash[:alert] = "スケジュール入力が見つかりませんでした。"
+      redirect_to root_path and return
+    end
   end
 
   private
