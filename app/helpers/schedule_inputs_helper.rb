@@ -1,0 +1,2 @@
+module ScheduleInputsHelper
+end

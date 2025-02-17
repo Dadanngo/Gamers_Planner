@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resource :logout, only: %i[ show ]
   resources :profiles, only: [ :show ]
   resources :events do
-    resources :schedule_inputs, only: [ :create ]
+    resources :schedule_inputs, only: [ :create, :new, :index ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'manual/show', to: 'manual#show', as: 'manual_show'
