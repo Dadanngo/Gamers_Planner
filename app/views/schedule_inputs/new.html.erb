@@ -3,7 +3,7 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <h2 class="mt-6 text-3xl font-extrabold text-center text-black"><%= @event.name %>日程登録</h2>
     </div>
-    <%= form_with model: @schedule_input, url: event_schedule_inputs_path(@event), local: true do |f| %>
+    <%= form_with model: @schedule_input, url: event_schedule_inputs_path(@event), method: :post, local: true do |f| %>
       <div class="mb-4">
         <%= f.label :player_name, 'プレイヤー名', class: "block text-2xl text-left" %>
         <%= f.text_field :player_name, placeholder: "プレイヤー名を入力してください", class: "w-full p-3 border border-black rounded-lg" %>
@@ -14,7 +14,7 @@
         <% job_options = ["該当なし","タンク","ヒーラー","DPS","ガンナー","近接戦闘","遠隔戦闘"] %>
         
 
-        <div style="max-height: 200px; overflow-y: auto;">
+        
         <%= f.select :job, 
         options_for_select(job_options, "該当なし"), 
         {}, 
@@ -45,7 +45,7 @@
               <%= f.radio_button :response, 'maybe', id: "response_maybe_#{event_time.id}", name: "schedule_input[response][#{event_time.id}]" %>
             </div>
             <div class="flex items-center flex-grow h-10 px-2 border-b border-l border-black">
-              <%= f.text_field :comment, placeholder: "△の備考記入欄", class: "w-full p-1 border border-black rounded-lg", name: "schedule_input[comment][#{event_time.id}]" %>
+              <%= f.text_field :comment, placeholder: "（プレイヤー名必須）", class: "w-full p-1 border border-black rounded-lg", name: "schedule_input[comment][#{event_time.id}]" %>
             </div>
             <%= f.hidden_field :event_time_id, value: event_time.id, name: "schedule_input[event_time_id][#{event_time.id}]" %>
           </div>

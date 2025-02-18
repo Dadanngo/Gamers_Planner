@@ -1,0 +1,113 @@
+<div class="bg-white w-full  max-w-8xl mx-auto p-3 overflow-y-auto font-mplus" style="max-height: calc(100vh - 160px);">
+  <h2 class="text-3xl text-center text-black"><%= @event.name %> 日程表</h2>
+
+  <div class="text-2xl text-lg text-black mt-1">
+    <p>ハンターID(MH): <%= @event.hunter_id.presence || "未設定" %></p>
+    <p>ロビーID(MH): <%= @event.lobby_id.presence || "未設定" %></p>
+    <p>活動DC(FF14): <%= @event.data_center&.name.presence || "未設定" %></p>
+  </div>
+
+      <% if @schedule_input.present? %>
+        <%= link_to request.base_url + new_event_schedule_input_path(@event, token: @schedule_input.token),
+        class: 'overflow-hidden rounded bg-orange-400 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
+         <span class="relative font-mplus">予定表追加</span>
+      <% end %>
+    <% else %>
+      <%= link_to request.base_url + new_event_schedule_input_path(@event),
+        class: 'overflow-hidden rounded bg-orange-400 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
+      <span class="relative font-mplus">予定表追加</span>
+      <% end %>
+    <% end %>
+
+    <div class="text-sm font-mplus flex items-center space-x-0.5 tracking-tight">
+      <p class="text-green-500">・活動あり</p>
+      <p class="text-red-500">・活動あるかも</p>
+      <p class="text-black">・なし</p>
+    </div>
+
+  <table class="border border-black mt-3 ">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="border border-black p-2 w-20 h-10 text-center text-sm">日付</th>
+        <% @schedule_inputs.reject { |input| input.player_name.blank? }.each do |input| %>
+          <th class="border border-black p-2 text-center w-10">
+            <div class="font-bold text-xs"><%= input.player_name %></div>
+            <div class="text-xs text-gray-600"><%= input.job.presence || "未選択" %></div>
+          </th>
+        <% end %>
+        <th class="border border-black p-2 w-32 text-center text-sm">△の備考欄</th> <!-- 右端に追加 -->
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @event.event_times.each do |event_time| %>
+         <% 
+          # 各日程のレスポンスを取得
+          responses_for_time = @schedule_inputs.reject { |input| input.player_name.blank? }
+                                .map { |input| JSON.parse(input.response)[event_time.id.to_s] rescue nil }
+                                .compact
+
+          # 背景色を決定
+          bg_color = case
+            when responses_for_time.all? { |r| r == "ok" } then "bg-green-200" # 全員〇
+            when responses_for_time.include?("ng") then "bg-white" # ✕がいる
+            when responses_for_time.all? { |r| r == "ok" || r == "maybe" } then "bg-red-200" # 〇と△のみ
+            else ""
+          end
+        %>
+
+        <tr class="<%= bg_color %>">
+
+          <!-- 縦軸（日時） -->
+          <td class="border border-black p-1 w-10 h-10 text-center text-xs"><%= event_time.start_time.strftime('%m-%d %H:%M') %></td>
+
+          <!-- 各プレイヤーの response -->
+          <% @schedule_inputs.reject { |input| input.player_name.blank? }.each do |input| %>
+            <% responses = JSON.parse(input.response) rescue {} %>
+            <td class="border border-black p-1 w-5 h-5 text-center text-xs">
+              <%= case responses[event_time.id.to_s]
+                  when "ok" then "〇"
+                  when "ng" then "✕"
+                  when "maybe" then "△"
+                  else "未定"
+                  end
+              %>
+            </td>
+          <% end %>
+
+          <!-- 右端の △の備考欄 -->
+          <td class="border border-black p-1 w-32 h-10 text-left text-xs">
+            <% comments_for_time = @schedule_inputs.map do |input|
+                comments = begin
+                  if input.comment.present?
+                    input.comment.include?("=>") ? eval(input.comment) : JSON.parse(input.comment)
+                  else
+                    {}
+                  end
+                rescue
+                  {}
+                end
+                comments[event_time.id.to_s]
+              end.compact.reject(&:blank?) %>
+
+            <% if comments_for_time.any? %>
+              <% comments_for_time.each do |comment| %>
+                <div class="text-xs text-black mt-1">・<%= comment %></div>
+              <% end %>
+            <% else %>
+              <div class="text-xs text-gray-400">未入力</div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="flex justify-center mt-6">
+    <%= link_to event_by_url_path(@event.url), class: 'p-3 bg-white border-blue-600 text-black font-bold rounded-lg' do %>
+      イベントページへ戻る
+    <% end %>
+  </div>
+</div>
+
+
