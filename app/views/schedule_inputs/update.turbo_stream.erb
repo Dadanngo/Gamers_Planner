@@ -1,0 +1,5 @@
+<turbo-stream action="replace" target="edit_schedule_input">
+  <turbo-frame id="edit_schedule_input">
+    <%= link_to @schedule_input.player_name, edit_event_schedule_input_path(@event, @schedule_input), class: "text-blue-500 hover:underline", data: { turbo_frame: "edit_schedule_input" } %>
+  </turbo-frame>
+</turbo-stream>

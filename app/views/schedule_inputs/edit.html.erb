@@ -1,0 +1,19 @@
+<turbo-frame id="edit_schedule_input">
+  <%= form_with model: @schedule_input, url: event_schedule_input_path(@event, @schedule_input), method: :patch do |f| %>
+    <div class="mb-4">
+      <%= f.label :player_name, 'プレイヤー名', class: "block text-lg text-left" %>
+      <%= f.text_field :player_name, class: "w-full p-2 border border-black rounded-lg", readonly: true %>
+    </div>
+
+    <% @event.event_times.each do |event_time| %>
+      <div class="flex items-center">
+        <span class="w-32"><%= event_time.start_time.strftime('%m-%d %H:%M') %></span>
+        <%= f.radio_button :response, 'ok', id: "response_ok_#{event_time.id}" %> 〇
+        <%= f.radio_button :response, 'ng', id: "response_ng_#{event_time.id}" %> ✕
+        <%= f.radio_button :response, 'maybe', id: "response_maybe_#{event_time.id}" %> △
+      </div>
+    <% end %>
+
+    <%= f.submit "更新", class: "p-3 bg-orange-400 text-white font-bold rounded-lg hover:bg-orange-500" %>
+  <% end %>
+</turbo-frame>
