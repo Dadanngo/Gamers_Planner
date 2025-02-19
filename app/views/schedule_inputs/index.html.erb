@@ -10,12 +10,12 @@
       <% if @schedule_input.present? %>
         <%= link_to request.base_url + new_event_schedule_input_path(@event, token: @schedule_input.token),
         class: 'overflow-hidden rounded bg-orange-400 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
-         <span class="relative font-mplus">予定表追加</span>
+         <span class="relative font-mplus">予定追加</span>
       <% end %>
     <% else %>
       <%= link_to request.base_url + new_event_schedule_input_path(@event),
         class: 'overflow-hidden rounded bg-orange-400 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
-      <span class="relative font-mplus">予定表追加</span>
+      <span class="relative font-mplus">予定追加</span>
       <% end %>
     <% end %>
 
@@ -31,7 +31,9 @@
         <th class="border border-black p-2 w-20 h-10 text-center text-sm">日付</th>
         <% @schedule_inputs.reject { |input| input.player_name.blank? }.each do |input| %>
           <th class="border border-black p-2 text-center w-10">
-            <div class="font-bold text-xs"><%= input.player_name %></div>
+           <div class="font-bold text-xs">
+              <%= link_to input.player_name, edit_event_schedule_input_by_url_path(url: @event.url, token: input.token), class: "text-blue-500 hover:underline" %>
+           </div>
             <div class="text-xs text-gray-600"><%= input.job.presence || "未選択" %></div>
           </th>
         <% end %>
@@ -49,6 +51,7 @@
 
           # 背景色を決定
           bg_color = case
+            when responses_for_time.empty? { |r| r ==" " } then "bg-white" # 全員未入力
             when responses_for_time.all? { |r| r == "ok" } then "bg-green-200" # 全員〇
             when responses_for_time.include?("ng") then "bg-white" # ✕がいる
             when responses_for_time.all? { |r| r == "ok" || r == "maybe" } then "bg-red-200" # 〇と△のみ
@@ -105,7 +108,7 @@
 
   <div class="flex justify-center mt-6">
     <%= link_to event_by_url_path(@event.url), class: 'p-3 bg-white border-blue-600 text-black font-bold rounded-lg' do %>
-      イベントページへ戻る
+      ⏎イベントページへ戻る
     <% end %>
   </div>
 </div>

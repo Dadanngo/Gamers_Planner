@@ -1,19 +1,56 @@
 <turbo-frame id="edit_schedule_input">
-  <%= form_with model: @schedule_input, url: event_schedule_input_path(@event, @schedule_input), method: :patch do |f| %>
-    <div class="mb-4">
-      <%= f.label :player_name, 'プレイヤー名', class: "block text-lg text-left" %>
-      <%= f.text_field :player_name, class: "w-full p-2 border border-black rounded-lg", readonly: true %>
-    </div>
-
-    <% @event.event_times.each do |event_time| %>
-      <div class="flex items-center">
-        <span class="w-32"><%= event_time.start_time.strftime('%m-%d %H:%M') %></span>
-        <%= f.radio_button :response, 'ok', id: "response_ok_#{event_time.id}" %> 〇
-        <%= f.radio_button :response, 'ng', id: "response_ng_#{event_time.id}" %> ✕
-        <%= f.radio_button :response, 'maybe', id: "response_maybe_#{event_time.id}" %> △
+  <div style="background-image: url('<%= asset_path("back_ground.webp") %>');" class="bg-custom min-h-screen flex flex-col pt-5 font-mplus">
+    <div class="divide-y bg-white w-full max-w-6xl mx-auto p-8 overflow-y-auto" style="max-height: calc(100vh - 160px);">
+      <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 class="mt-6 text-3xl font-extrabold text-center text-black">日程変更</h2>
       </div>
-    <% end %>
 
-    <%= f.submit "更新", class: "p-3 bg-orange-400 text-white font-bold rounded-lg hover:bg-orange-500" %>
-  <% end %>
+      <%= form_with model: @schedule_input, url:update_event_schedule_input_by_url_path(@event.url, @schedule_input.token), method: :patch, local: false, data: { turbo_frame: "edit_schedule_input" } do |f| %>
+        <div class="mb-4">
+          <%= f.label :player_name, 'プレイヤー名', class: "block text-2xl text-left" %>
+          <%= f.text_field :player_name, value: @schedule_input.player_name, placeholder: "プレイヤー名を入力してください", class: "w-full p-3 border border-black rounded-lg" %>
+        </div>
+
+        <div class="flex flex-col w-full border-t border-r border-black mt-8">
+          <div class="flex bg-blue-500 text-white">
+            <div class="flex items-center w-32 h-10 px-2 border-b border-l border-black"><span>日付</span></div>
+            <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>〇</span></div>
+            <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>✕</span></div>
+            <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>△</span></div>
+            <div class="flex items-center flex-grow h-10 px-2 border-b border-l border-black"><span>△の備考記入欄</span></div>
+          </div>
+
+          <% responses = JSON.parse(@schedule_input.response) rescue {} %>
+          <% comments = JSON.parse(@schedule_input.comment) rescue {} %>
+
+          <% @event.event_times.each do |event_time| %>
+            <div class="flex">
+              <div class="w-32 h-10 px-2 border-b border-l border-black flex items-center">
+                <span><%= event_time.start_time.strftime('%Y-%m-%d %H:%M') %></span>
+              </div>
+              <div class="w-10 h-10 border-b border-l border-black flex justify-center items-center">
+                <%= f.radio_button :response, 'ok', checked: responses[event_time.id.to_s] == "ok", id: "response_ok_#{event_time.id}", name: "schedule_input[response][#{event_time.id}]" %>
+              </div>
+              <div class="w-10 h-10 border-b border-l border-black flex justify-center items-center">
+                <%= f.radio_button :response, 'ng', checked: responses[event_time.id.to_s] == "ng", id: "response_ng_#{event_time.id}", name: "schedule_input[response][#{event_time.id}]" %>
+              </div>
+              <div class="w-10 h-10 border-b border-l border-black flex justify-center items-center">
+                <%= f.radio_button :response, 'maybe', checked: responses[event_time.id.to_s] == "maybe", id: "response_maybe_#{event_time.id}", name: "schedule_input[response][#{event_time.id}]" %>
+              </div>
+              <div class="flex items-center flex-grow h-10 px-2 border-b border-l border-black">
+                <%= f.text_field :comment, value: comments[event_time.id.to_s], placeholder: "△の備考記入欄", class: "w-full p-1 border border-black rounded-lg", name: "schedule_input[comment][#{event_time.id}]" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class="font-mplus flex items-center space-x-0.5 tracking-tight">
+        <%= f.submit "更新する", class: "p-3 bg-orange-400 w-2/3 text-white font-bold rounded-lg hover:bg-orange-500" %>
+      <% end %>
+
+    <div class="font-mplus flex space-x-0.5 tracking-tight">
+      <%= button_to "削除する", delete_event_schedule_input_by_url_path(@event.url, @schedule_input.token),method: :delete,data: { turbo: "false" },class: " p-3 bg-red-400 text-white font-bold rounded-lg hover:bg-red-500" %>
+    </div>
+  </div>
+</div>
 </turbo-frame>

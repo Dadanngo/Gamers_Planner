@@ -1,5 +1,6 @@
 class ScheduleInputsController < ApplicationController
     before_action :set_event
+    before_action :set_schedule_input, only: [ :edit, :update, :destroy ]
 
     def new
       @schedule_input = @event.schedule_inputs.find_by(token: params[:token])
@@ -21,7 +22,7 @@ class ScheduleInputsController < ApplicationController
       @schedule_input.event_time_id = schedule_input_params[:event_time_id].values.first.to_i if schedule_input_params[:event_time_id].present?
 
       if @schedule_input.save
-        redirect_to event_schedule_inputs_path(@event), notice: '登録完了しました'
+        redirect_to event_schedule_inputs_by_url_path(@event.url), notice: '登録完了しました'
       else
         flash[:alert] = "登録に失敗しました。入力内容を確認してください"
         render :new
@@ -29,7 +30,44 @@ class ScheduleInputsController < ApplicationController
     end
 
     def index
-      @schedule_inputs = @event.schedule_inputs.includes(:event_time) if @event
+      @event = Event.find_by(url: params[:url])
+
+      unless @event
+        flash[:alert] = "イベントが見つかりません。"
+        redirect_to root_path and return
+      end
+
+      @schedule_inputs = @event.schedule_inputs
+    end
+
+
+    def edit
+      @event = Event.find_by(url: params[:url]) # URLでイベントを取得
+      @schedule_input = @event.schedule_inputs.find_by(token: params[:token])
+    end
+
+    def update
+      updated_params = schedule_input_params
+      updated_params[:response] = updated_params[:response].to_json
+      updated_params[:comment] = updated_params[:comment].to_json if updated_params[:comment].present?
+
+      if @schedule_input.update(updated_params)
+        redirect_to event_schedule_inputs_by_url_path(@event.url), notice: '日程を更新しました'
+      end
+    end
+
+    def destroy
+      @schedule_input = @event.schedule_inputs.find_by(token: params[:token])
+
+      if @schedule_input.nil?
+        flash[:alert] = "スケジュールが見つかりません。"
+        redirect_to event_schedule_inputs_path(@event) and return
+      end
+
+      if @schedule_input.destroy
+        flash[:notice] = "ユーザーを削除しました。"
+      end
+      redirect_to event_schedule_inputs_by_url_path(@event.url)
     end
 
   private
@@ -41,6 +79,8 @@ class ScheduleInputsController < ApplicationController
   def set_event
     if params[:event_id].present?
       @event = Event.find_by(id: params[:event_id])
+    elsif params[:url].present?
+      @event = Event.find_by(url: params[:url])
     end
 
     unless @event

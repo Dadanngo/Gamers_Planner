@@ -5,12 +5,12 @@
     <br>
     <div class="border border-black text-black p-4 rounded-lg mb-4">
      <%#= トークンからURLとクエリパラメータ付与して生成 %>  
-        <a href="<%= request.base_url + new_event_schedule_input_path(@event, token: @schedule_input.token) %>">
-    <%= request.base_url + new_event_schedule_input_path(@event, token: @schedule_input.token) %>
+        <a href="<%= request.base_url + event_schedule_inputs_by_url_path(@event.url) %>">
+    <%= request.base_url + event_schedule_inputs_by_url_path(@event.url) %>
         </a>
     </div>
       <div class="flex justify-center">
-        <%= link_to request.base_url + new_event_schedule_input_path(@event, token: @schedule_input.token), class: 'relative h-12 overflow-hidden rounded bg-orange-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
+        <%= link_to request.base_url + event_schedule_inputs_by_url_path(@event.url) , class: 'relative h-12 overflow-hidden rounded bg-orange-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
           <span class="relative font-mplus">予定表表示</span>
         <% end %>
       </div>
