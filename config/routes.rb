@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   root 'top#index'
-  resources :users
+  resources :users, only: [ :show ]
   resource :login, only: %i[ new create ]
   resource :logout, only: %i[ show ]
   resources :profiles, only: [ :show ]
   resources :events do
     resources :schedule_inputs, only: [ :create, :new, :index ]
+    member do
+      get "recreate", to: "events#recreate"
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'manual/show', to: 'manual#show', as: 'manual_show'

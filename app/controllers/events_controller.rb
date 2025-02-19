@@ -1,7 +1,14 @@
 class EventsController < ApplicationController
+  before_action :set_event, only: [ :recreate ]
   def new
     @event = Event.new
     @event.event_times.build
+
+    if session[:cloned_event].present? # recreateからのデータがある場合復元
+      @event.assign_attributes(session[:cloned_event])
+      session.delete(:cloned_event) # 使い終わったら削除
+      session.delete(:cloned_event_times)
+    end
   end
 
   def create
@@ -48,9 +55,25 @@ class EventsController < ApplicationController
     end
   end
 
+  def recreate
+    @new_event = @event.dup # 既存のイベントをコピー
+    @new_event.url = SecureRandom.hex(10) # 新しいURLを生成
+    @new_event.id = nil # 新規オブジェクトとして扱う
+    @new_event.event_times = @event.event_times.map { |et| et.dup } # イベント日程も複製
+
+    session[:cloned_event] = @new_event.attributes # 一時保存（セッションに入れる）
+    session[:cloned_event_times] = @event.event_times.map(&:attributes)
+
+    redirect_to new_event_path, notice: "再作成します。"
+  end
+
   private
 
   def event_params
     params.require(:event).permit(:name, :game_id, :data_center_id, :hunter_id, :lobby_id, :url, event_times_attributes: [ :start_time ])
+  end
+
+  def set_event
+    @event = Event.find(params[:id])
   end
 end
