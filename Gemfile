@@ -60,3 +60,4 @@ end
 
 gem 'sorcery', '0.16.3'
 gem 'fullcalendar-rails'
+gem "hashid-rails", "~> 1.0"

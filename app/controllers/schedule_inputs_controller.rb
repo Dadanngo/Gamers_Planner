@@ -19,6 +19,7 @@ class ScheduleInputsController < ApplicationController
       @schedule_input.token = SecureRandom.hex(16)
       # JSONに変換
       @schedule_input.response = schedule_input_params[:response].to_json
+      @schedule_input.comment = schedule_input_params[:comment].present? ? schedule_input_params[:comment].to_json : {}.to_json
       @schedule_input.event_time_id = schedule_input_params[:event_time_id].values.first.to_i if schedule_input_params[:event_time_id].present?
 
       if @schedule_input.save
