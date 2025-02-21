@@ -58,6 +58,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'sorcery', '0.16.3'
+gem 'sorcery', '0.17.0'
 gem 'fullcalendar-rails'
 gem "hashid-rails", "~> 1.0"
