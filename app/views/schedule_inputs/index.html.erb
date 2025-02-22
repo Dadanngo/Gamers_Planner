@@ -66,7 +66,7 @@
 
           <!-- 各プレイヤーの response -->
           <% @schedule_inputs.reject { |input| input.player_name.blank? }.each do |input| %>
-            <% responses = JSON.parse(input.response) rescue {} %>
+            <% responses = (input.response.present? && input.response != "null") ? JSON.parse(input.response) : {} %>
             <td class="border border-black p-1 w-5 h-5 text-center text-xs">
               <%= case responses[event_time.id.to_s]
                   when "ok" then "〇"
