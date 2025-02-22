@@ -28,6 +28,7 @@
               <div class="w-32 h-10 px-2 border-b border-l border-black flex items-center">
                 <span><%= event_time.start_time.strftime('%Y-%m-%d %H:%M') %></span>
               </div>
+               <% responses = (@schedule_input.response.present? && @schedule_input.response != "null") ? JSON.parse(@schedule_input.response) : {} %>
               <div class="w-10 h-10 border-b border-l border-black flex justify-center items-center">
                 <%= f.radio_button :response, 'ok', checked: responses[event_time.id.to_s] == "ok", id: "response_ok_#{event_time.id}", name: "schedule_input[response][#{event_time.id}]" %>
               </div>

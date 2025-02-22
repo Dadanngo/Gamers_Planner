@@ -19,13 +19,14 @@ class ScheduleInputsController < ApplicationController
       @schedule_input.token = SecureRandom.hex(16)
       # JSONに変換
       @schedule_input.response = schedule_input_params[:response].to_json
-      @schedule_input.comment = schedule_input_params[:comment].present? ? schedule_input_params[:comment].to_json : {}.to_json
+      @schedule_input.comment = schedule_input_params[:comment].values.any?(&:present?) ? schedule_input_params[:comment].to_json : nil
+      
       @schedule_input.event_time_id = schedule_input_params[:event_time_id].values.first.to_i if schedule_input_params[:event_time_id].present?
 
       if @schedule_input.save
         redirect_to event_schedule_inputs_by_url_path(@event.url), notice: '登録完了しました'
       else
-        flash[:alert] = "登録に失敗しました。入力内容を確認してください"
+        flash[:alert] = "登録に失敗しました。入力内容に不足があります。"
         render :new
       end
     end

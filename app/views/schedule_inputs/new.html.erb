@@ -3,6 +3,12 @@
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <h2 class="mt-6 text-3xl font-extrabold text-center text-black"><%= @event.name %>日程登録</h2>
     </div>
+    <% if flash[:alert] %>
+      <div class="bg-red-200 text-red-700 p-2 rounded-lg mb-4">
+      <%= flash[:alert] %>
+      </div>
+    <% end %>
+  
     <%= form_with model: @schedule_input, url: event_schedule_inputs_path(@event), method: :post, local: true do |f| %>
       <div class="mb-4">
         <%= f.label :player_name, 'プレイヤー名', class: "block text-2xl text-left" %>
