@@ -12,11 +12,13 @@
           <% end %>
         </div>
         <% if @show_details_1 %>
-          <span class="mt-4 text-black">1.<a href="/events/new" class="text-blue-500 underline">予定を立てる</a>を押し、STEP1をプルダウンから選択してください。</span>
-          <span class="mt-4 text-black">2.次にカレンダーから候補日にしたい日付を選択し、開始時間を編集してください。</span>
-          <span class="text-black">日程候補から指定した日付を編集可能（複数選択可能）</span>
+          <span class="mt-4 text-black text-xs sm:text-base">1.<a href="/events/new" class="text-blue-500 underline">予定を立てる</a>を押し、STEP1をプルダウンから選択してください。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">2.次にカレンダーから候補日にしたい日付を選択し、</span>
+           <span class="text-black text-xs sm:text-base">開始時間を編集してください。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">日程候補から指定した日付を編集可能（複数選択可能）</span>
            <%= image_tag "manual_1.png", class: "w-50 h-50 object-cover" %>
-          <span class="mt-4 text-black">3.登録をボタンを押すと予定表URLが出力されますので、参加者へ送信してください。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">3.登録をボタンを押すと予定表URLが出力されますので、</span>
+          <span class="text-black text-xs sm:text-base">参加者へ送信してください。</span>
           <%= image_tag "manual_2.png", class: "w-50 h-50 object-cover" %>
         <% end %>
       </div>
@@ -34,13 +36,13 @@
           <% end %>
         </div>
         <% if @show_details_2 %>
-          <span class="mt-4 text-black">1.予定追加を押す。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">1.予定追加を押す。</span>
             <%= image_tag "manual_3.png", class: "w-[300px] h-[250px] object-cover" %>
-          <span class="mt-4 text-black">2. プレイヤー名と、ジョブ名や使用武器をプルダウンから選択して下さい。</span>
-            <span class="text-black">3. 自分の活動可能日程を〇✕△で選択して下さい。</span>
-            <span class="text-black">（△で参加が微妙な場合は備考記入欄へ記入。あわせてプレイヤー名も記入する。）</span>
+          <span class="mt-4 text-black text-xs sm:text-base">2. プレイヤー名と、ジョブ名や使用武器をプルダウンから選択して下さい。</span>
+            <span class="mt-4 text-black text-xs sm:text-base">3. 自分の活動可能日程を〇✕△で選択して下さい。</span>
+            <span class="mt-4 text-black text-xs sm:text-base">（△で参加が微妙な場合は備考記入欄へ記入。あわせてプレイヤー名も記入する。）</span>
             <%= image_tag "manual_4.png", class: "w-50 h-50 object-cover" %>
-          <span class="mt-4 text-black">4.登録ボタンを押して、日程入力完了です。予定を変更したい場合は、作成された予定表のプレイヤー名をクリックしてください。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">4.登録ボタンを押して、日程入力完了です。予定を変更したい場合は、作成された予定表のプレイヤー名をクリックしてください。</span>
             <%= image_tag "manual_5.png", class: "w-[300px] h-[150px] object-cover" %>
         <% end %>
       </div>
@@ -58,9 +60,9 @@
           <% end %>
         </div>
         <% if @show_details_3 %>
-          <span class="mt-4 text-black">1.<a href="#" class="text-blue-500 underline">Botを連携する</a>ボタンを押し、DICORDで通知したいサーバーを選択して下さい。</span>
-          <span class="mt-4 text-black">2.予定表から全員の入力を確認後に、DISCORDで通知ボタンを押してください。</span>
-          <span class="mt-4 text-black">3.活動日当日の17時にサーバー内で活動日のリマインドがされます!</span>
+          <span class="mt-4 text-black text-xs sm:text-base">1.<a href="#" class="text-blue-500 underline">Botを連携する</a>ボタンを押し、DICORDで通知したいサーバーを選択。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">2.予定表から全員の入力を確認後に、DISCORDで通知ボタンを押す。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">3.活動日当日の17時にサーバー内で活動日のリマインドがされます!</span>
            <div class="flex justify-end">
               <button class="relative h-12 overflow-hidden rounded bg-blue-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-blue-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2">
                 <span class="relative font-mplus">>Botを連携する</span>
