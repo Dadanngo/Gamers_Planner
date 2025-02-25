@@ -1,13 +1,13 @@
 <%#= 背景指定と要素を中央に配置 %>
-<div style="background-image: url('<%= asset_path("back_ground.webp") %>');" class="bg-custom h-screen flex items-center justify-center">
+<div style="background-image: url('<%= asset_path("back_ground.webp") %>');" class="bg-custom h-screen flex items-center justify-center relative">
   <%#= ブルーバックグラウンドしてtailamimisaエフェクト適用 %>
- <div style="background: linear-gradient(to right, #06b6d4, #3b82f6)" class="text-white p-4 font-mplus animate-scale-up-hor-left text-left">
-    <h1 class="text-white text-7xl font-mplus">ゲームプレイヤー同士の</h1>
-    <h1 class="text-white text-7xl font-mplus">予定作成に特化した</h1>
-    <br>
-    <h1 class="text-white text-8xl font-mplus">日程調整サービス。</h1>
-    <br>
-    <br>
+ <div style="background: linear-gradient(to right, #06b6d4, #3b82f6)" class="text-white p-4 font-mplus animate-scale-up-hor-left text-left absolute top-[10%] transform -translate-y-[10%]">
+  <h1 class="text-white text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-mplus">ゲームプレイヤー同士の</h1>
+  <h1 class="text-white text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-mplus">予定作成に特化した</h1>
+  <br>
+  <h1 class="text-white text-4xl sm:text-4xl md:text-6xl lg:text-8xl font-mplus">日程調整サービス。</h1>
+  <br>
+  <br>
     <div class="flex justify-end">
       <%= link_to new_event_path, class: 'relative h-12 overflow-hidden rounded bg-orange-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
       <span class="relative font-mplus">予定を立てる</span>

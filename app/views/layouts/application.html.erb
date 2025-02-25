@@ -18,7 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
   </head>
 
-  <body>
+  <body class="flex flex-col min-h-screen">
   <% if flash[:notice] %>
     <div class="p-4 mb-4 text-sm rounded-lg border text-green-800 bg-green-50 border-green-300 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
     <%= flash[:notice] %>
@@ -36,7 +36,11 @@
   <% end %>
 
     <%= render 'shared/header' %>
+
+    <main class="flex-grow w-full">
     <%= yield %>
+    </main>
+    
     <%= render 'shared/footer' %>
     <script defer src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   </body>

@@ -11,21 +11,21 @@
           <%= f.text_field :player_name, value: @schedule_input.player_name, placeholder: "プレイヤー名を入力してください", class: "w-full p-3 border border-black rounded-lg" %>
         </div>
 
-        <div class="flex flex-col w-full border-t border-r border-black mt-8">
-          <div class="flex bg-blue-500 text-white">
-            <div class="flex items-center w-32 h-10 px-2 border-b border-l border-black"><span>日付</span></div>
-            <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>〇</span></div>
-            <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>✕</span></div>
-            <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>△</span></div>
-            <div class="flex items-center flex-grow h-10 px-2 border-b border-l border-black"><span>△の備考記入欄</span></div>
-          </div>
+      <div class="flex flex-col w-full border-t border-r border-black mt-8">
+        <div class="flex bg-blue-500 text-white">
+          <div class="flex items-center w-32 h-10 px-2 border-b border-l border-black"><span>日付</span></div>
+          <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>〇</span></div>
+          <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>✕</span></div>
+          <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>△</span></div>
+          <div class="flex items-center w-full h-10 px-2 border-b border-l border-black"><span>△の備考記入欄</span></div>
+        </div>
 
           <% responses = JSON.parse(@schedule_input.response) rescue {} %>
           <% comments = JSON.parse(@schedule_input.comment) rescue {} %>
 
           <% @event.event_times.each do |event_time| %>
             <div class="flex">
-              <div class="w-32 h-10 px-2 border-b border-l border-black flex items-center">
+              <div class="w-32 h-10 overflow-hidden text-ellipsis px-2 border-b border-l border-black flex items-center text-sm">
                 <span><%= event_time.start_time.strftime('%Y-%m-%d %H:%M') %></span>
               </div>
                <% responses = (@schedule_input.response.present? && @schedule_input.response != "null") ? JSON.parse(@schedule_input.response) : {} %>
@@ -38,7 +38,7 @@
               <div class="w-10 h-10 border-b border-l border-black flex justify-center items-center">
                 <%= f.radio_button :response, 'maybe', checked: responses[event_time.id.to_s] == "maybe", id: "response_maybe_#{event_time.id}", name: "schedule_input[response][#{event_time.id}]" %>
               </div>
-              <div class="flex items-center flex-grow h-10 px-2 border-b border-l border-black">
+              <div class="flex items-center w-full h-10 px-2 border-b border-l border-black">
                 <%= f.text_field :comment, value: comments[event_time.id.to_s], placeholder: "△の備考記入欄", class: "w-full p-1 border border-black rounded-lg", name: "schedule_input[comment][#{event_time.id}]" %>
               </div>
             </div>

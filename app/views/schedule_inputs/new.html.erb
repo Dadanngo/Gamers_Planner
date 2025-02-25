@@ -33,12 +33,12 @@
           <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>〇</span></div>
           <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>✕</span></div>
           <div class="flex items-center w-10 h-10 border-b border-l border-black justify-center"><span>△</span></div>
-          <div class="flex items-center flex-grow h-10 px-2 border-b border-l border-black"><span>△の備考記入欄</span></div>
+          <div class="flex items-center w-full h-10 px-2 border-b border-l border-black"><span>△の備考記入欄</span></div>
         </div>
 
         <% @event.event_times.each do |event_time| %>
           <div class="flex">
-            <div class="w-32 h-10 px-2 border-b border-l border-black flex items-center">
+            <div class="w-32 h-10 overflow-hidden text-ellipsis px-2 border-b border-l border-black flex items-center text-sm">
               <span><%= event_time.start_time.strftime('%Y-%m-%d %H:%M') %></span>
             </div>
             <div class="w-10 h-10 border-b border-l border-black flex justify-center items-center">
@@ -50,7 +50,7 @@
             <div class="w-10 h-10 border-b border-l border-black flex justify-center items-center">
               <%= f.radio_button :response, 'maybe', id: "response_maybe_#{event_time.id}", name: "schedule_input[response][#{event_time.id}]" %>
             </div>
-            <div class="flex items-center flex-grow h-10 px-2 border-b border-l border-black">
+            <div class="flex items-center w-full h-10 px-2 border-b border-l border-black">
               <%= f.text_field :comment, placeholder: "（プレイヤー名必須）", class: "w-full p-1 border border-black rounded-lg", name: "schedule_input[comment][#{event_time.id}]" %>
             </div>
             <%= f.hidden_field :event_time_id, value: event_time.id, name: "schedule_input[event_time_id][#{event_time.id}]" %>
