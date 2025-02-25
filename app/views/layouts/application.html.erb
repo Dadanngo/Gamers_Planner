@@ -29,6 +29,11 @@
     <%= flash[:warning] %>
     </div>
   <% end %>
+  <% if flash[:alert] %>
+    <div class="p-4 mb-4 text-sm rounded-lg border text-red-800 bg-red-50 border-red-300 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
 
     <%= render 'shared/header' %>
     <%= yield %>

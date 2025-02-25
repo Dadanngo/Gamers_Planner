@@ -23,10 +23,9 @@ class EventsController < ApplicationController
     end
 
     if @event.save
-
       redirect_to event_by_url_path(@event.url), notice: 'イベントが作成されました。'
     else
-      flash[:alert] = "イベント作成に失敗しました。入力内容を確認してください。"
+      flash.now[:alert] = @event.errors.full_messages.join(", ")
       render :new
     end
   end
