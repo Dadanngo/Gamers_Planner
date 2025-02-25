@@ -6,6 +6,7 @@ class Event < ApplicationRecord
   has_many :event_times, dependent: :destroy
   has_many :schedule_inputs, dependent: :destroy
   accepts_nested_attributes_for :event_times
+  validate :must_have_at_least_one_event_time
 
   private
 
@@ -14,6 +15,12 @@ class Event < ApplicationRecord
     loop do
       self.url = SecureRandom.hex(10)
       break unless Event.exists?(url: self.url)
+    end
+  end
+
+  def must_have_at_least_one_event_time
+    if event_times.empty?
+    errors.add(:base, "少なくとも1つの日程を追加してください。")
     end
   end
 end

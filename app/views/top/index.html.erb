@@ -15,4 +15,15 @@
       </button>
     </div>
   </div>
+<%# キャラクターと吹き出しを左下に配置 %>
+  <div class="fixed bottom-32 left-4 flex flex-col items-start z-50">
+    <%# 吹き出し部分 %>
+    <div class="relative bg-yellow-100 text-black p-3 rounded-lg shadow-lg max-w-xs z-50 animate-wiggle ">
+      <p class="text-sm font-semibold">✅モンハンとFF14対応！</p>
+    <%# 吹き出しの三角形 %>
+    <div class="absolute -bottom-3 left-4 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-yellow-100"></div>
+  </div>
+    <%# キャラクター画像 %>
+    <%= image_tag "character_2.png", class: "w-40 h-40 object-cover z-50  animate-wiggle" %>
+  </div>
 </div>
