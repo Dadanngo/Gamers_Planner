@@ -2,6 +2,7 @@
 //import "@hotwired/turbo-rails"
 import "./controllers"
 import { initializeCalendar } from './calendar';
+import "./controllers/lobby_id_controller";
 
 document.addEventListener("DOMContentLoaded", function() {
     console.log("Initializing calendar...");
