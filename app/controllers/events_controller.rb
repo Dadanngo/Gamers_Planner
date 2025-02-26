@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [ :recreate ]
+  before_action :set_event, only: [ :recreate, :update_lobby_id ]
   def new
     @event = Event.new
     @event.event_times.build
@@ -54,6 +54,14 @@ class EventsController < ApplicationController
     redirect_to new_event_path, notice: "再作成します。"
   end
 
+  def update_lobby_id
+    if @event.update(lobby_id: params[:event][:lobby_id])
+      render json: { lobby_id: @event.lobby_id }
+    else
+      render json: { error: "更新に失敗しました", messages: @event.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def event_params
@@ -61,6 +69,10 @@ class EventsController < ApplicationController
   end
 
   def set_event
-    @event = Event.find(params[:id])
+    if params[:id].present?
+      @event = Event.find_by(id: params[:id])
+    elsif params[:url].present?
+      @event = Event.find_by(url: params[:url])
+    end
   end
 end

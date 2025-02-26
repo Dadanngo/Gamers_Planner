@@ -3,7 +3,9 @@
 
   <div class="text-2xl text-lg text-black mt-1">
     <p>ハンターID(MH): <%= @event.hunter_id.presence || "未設定" %></p>
-    <p>ロビーID(MH): <%= @event.lobby_id.presence || "未設定" %></p>
+    <p>ロビーID(MH): <span id="lobby-id-display" data-update-url="<%= update_lobby_id_event_by_url_path(url: @event.url) %>"><%= @event.lobby_id.presence || "未設定" %></span></p>
+    <input type="text" id="lobby-id-input" class="hidden p-1 border border-gray-300 rounded-md" value="<%= @event.lobby_id %>">
+    <button id="lobby-id-save" class="hidden ml-2 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">保存</button>
     <p>活動DC(FF14): <%= @event.data_center&.name.presence || "未設定" %></p>
   </div>
 
