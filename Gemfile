@@ -61,3 +61,6 @@ end
 gem 'sorcery', '0.16.3'
 gem 'fullcalendar-rails'
 gem "hashid-rails", "~> 1.0"
+gem 'discordrb', '~> 3.4'
+gem 'dotenv-rails'
+gem "whenever", require: false

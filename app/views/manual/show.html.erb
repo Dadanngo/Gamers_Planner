@@ -60,12 +60,30 @@
           <% end %>
         </div>
         <% if @show_details_3 %>
-          <span class="mt-4 text-black text-xs sm:text-base">1.<a href="#" class="text-blue-500 underline">Botを連携する</a>ボタンを押し、DICORDで通知したいサーバーを選択。</span>
-          <span class="mt-4 text-black text-xs sm:text-base">2.予定表から全員の入力を確認後に、DISCORDで通知ボタンを押す。</span>
-          <span class="mt-4 text-black text-xs sm:text-base">3.活動日当日の17時にサーバー内で活動日のリマインドがされます!</span>
+          <span class="mt-4 text-black text-xs sm:text-base">DiscordBotを導入する事によって活動日当日の17時に当日の活動有無を通知する事が可能です。</span>
+          <span class="text-black text-xs sm:text-base">※1つのアカウントにつき、1つのDiscordサーバーと連携します。</span>
+          <span class="text-black text-xs sm:text-base">誤って招待した場合や他のサーバーで新規に通知したい場合は、botをキック後に下記手順に従い再度Bot連携して下さい。</span>
+          <br>
+          <span class="mt-4 text-black text-xs sm:text-base">1.当サービスログイン後、下部「Bot連携」ボタンを押し、DICORDで日程を通知したいサーバーを選択後、</span>
+          <span class="text-black text-xs sm:text-base">指示に沿って認証をしてください。（サーバー管理者の方は、Botを招待する権限が必要です。）</span>
+          <%= image_tag "manual_6.png", class: "w-[300px] h-[250px] object-cover" %>
+          <span class="mt-4 text-black text-xs sm:text-base">2.Discordに移動し、通知を送信したいチャンネルで「!set_channel」をメッセージで送信してください。</span>
+          <span class="text-black text-xs sm:text-base">設定が正常に完了すると、botが反応します。</span>
+           <%= image_tag "manual_7.png", class: "object-cover" %>
+          <span class="mt-4 text-black text-xs sm:text-base">3.予定表から全員の入力を確認後に、DISCORDで通知ボタンを押す。</span>
+           <%= image_tag "manual_8.png", class: "object-cover" %>
+          <span class="mt-4 text-black text-xs sm:text-base">4.サーバー内で活動日のリマインドがされます!</span>
            <div class="flex justify-end">
               <button class="relative h-12 overflow-hidden rounded bg-blue-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-blue-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2">
-                <span class="relative font-mplus">>Botを連携する</span>
+               <% if current_user %>
+                 <% redirect_uri = Rails.env.production? ?
+                  "https://gamers-planner.onrender.com/discord/callback" :
+                  "http://localhost:3000/discord/callback" %>
+
+                  <%= link_to "Bot連携", "https://discord.com/oauth2/authorize?client_id=#{ENV['DISCORD_CLIENT_ID']}&permissions=8&scope=bot+identify&redirect_uri=#{CGI.escape(redirect_uri)}&response_type=code", target: "_blank", rel: "noopener noreferrer" %>
+              <% else %>
+                <p>ログインするとBot連携が可能になります。</p>
+              <% end %>
               </button>
             </div>
         <% end %>

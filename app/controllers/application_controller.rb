@@ -9,4 +9,9 @@ class ApplicationController < ActionController::Base
   def set_current_user
     @user = current_user
   end
+
+  def not_authenticated
+    flash[:alert] = "ログインが必要です"
+    redirect_to login_path
+  end
 end
