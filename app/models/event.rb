@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   belongs_to :data_center, optional: true
   has_many :event_times, dependent: :destroy
   has_many :schedule_inputs, dependent: :destroy
+  has_one :notification, dependent: :destroy
   accepts_nested_attributes_for :event_times
   validate :must_have_at_least_one_event_time
 

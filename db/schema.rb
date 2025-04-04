@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_17_173013) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_25_043908) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_173013) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.boolean "notify_today"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_notifications_on_event_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "schedule_inputs", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.string "token", null: false
@@ -71,6 +81,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_173013) do
     t.datetime "updated_at", null: false
     t.string "crypted_password"
     t.string "salt"
+    t.string "discord_server_id"
+    t.string "discord_channel_id"
+    t.string "discord_user_id"
   end
 
   add_foreign_key "data_centers", "games"
@@ -78,6 +91,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_173013) do
   add_foreign_key "events", "data_centers"
   add_foreign_key "events", "games"
   add_foreign_key "events", "users"
+  add_foreign_key "notifications", "events"
+  add_foreign_key "notifications", "users"
   add_foreign_key "schedule_inputs", "event_times"
   add_foreign_key "schedule_inputs", "events"
 end

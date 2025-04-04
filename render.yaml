@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: gamers-planner-web
+    env: ruby
+    buildCommand: "bundle install && yarn install"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DISCORD_BOT_TOKEN
+        sync: false
+      - key: RAILS_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gamers-planner-db
+          property: connectionString
+
+  - type: worker
+    name: gamers-planner-bot
+    env: ruby
+    buildCommand: "bundle install"
+    startCommand: "bundle exec ruby bot.rb"
+    envVars:
+      - key: DISCORD_BOT_TOKEN
+        sync: false
+      - key: RAILS_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gamers-planner-db
+          property: connectionString

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: [ :show, :create, :new ]
   resource :login, only: %i[ new create ]
   resource :logout, only: %i[ show ]
+  resources :notifications, only: [ :create ]
   resources :profiles, only: [ :show ]
   resources :events do
     resources :schedule_inputs, only: [ :create, :new, :index ]
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   delete '/events/url/:url/schedule_inputs/:token', to: 'schedule_inputs#destroy', as: 'delete_event_schedule_input_by_url'
   patch '/events/url/:url/update_lobby_id', to: 'events#update_lobby_id', as: 'update_lobby_id_event_by_url'
   get '/events/url/:url', to: 'events#show', as: 'event_by_url'
+  get '/discord/callback', to: 'discord#callback'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

@@ -12,12 +12,12 @@
       <% if @schedule_input.present? %>
         <%= link_to request.base_url + new_event_schedule_input_path(@event, token: @schedule_input.token),
         class: 'overflow-hidden rounded bg-orange-400 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
-         <span class="relative font-mplus">予定追加</span>
+         <span class="relative font-mplus">プレイヤー予定追加</span>
       <% end %>
     <% else %>
       <%= link_to request.base_url + new_event_schedule_input_path(@event),
         class: 'overflow-hidden rounded bg-orange-400 text-white transition-all duration-300 hover:bg-orange-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2' do %>
-      <span class="relative font-mplus">予定追加</span>
+      <span class="relative font-mplus">プレイヤー予定追加</span>
       <% end %>
     <% end %>
 
@@ -108,11 +108,13 @@
     </tbody>
   </table>
 
+  <% if @user %>
+  <%= button_to "Discord通知する", notifications_path(event_id: @event.id), method: :post, class: "flex justify-center mt-3 btn btn-primary overflow-hidden rounded bg-lime-400 text-white transition-all duration-300 hover:bg-lime-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2" %>
+  <% end %>
+
   <div class="flex justify-center mt-6">
     <%= link_to event_by_url_path(@event.url), class: 'p-3 bg-white border-blue-600 text-black font-bold rounded-lg' do %>
       ⏎予定表のURLを見る
-    <% end %>
+    <% end %>    
   </div>
 </div>
-
-
