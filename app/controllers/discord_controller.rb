@@ -2,21 +2,23 @@ class DiscordController < ApplicationController
   before_action :require_login
 
   def callback
+    redirect_uri = if Rails.env.production?
+      "https://gamers-planner.onrender.com/discord/callback"
+    else
+      "http://localhost:3000/discord/callback"
+    end
+
     # アクセストークンを取得
     token_response = RestClient.post("https://discord.com/api/oauth2/token", {
       client_id: ENV['DISCORD_CLIENT_ID'],
       client_secret: ENV['DISCORD_CLIENT_SECRET'],
       grant_type: 'authorization_code',
       code: params[:code],
-      redirect_uri: "http://localhost:3000/discord/callback",
+      redirect_uri: redirect_uri,
       scope: 'identify'
     }, {
       'Content-Type': 'application/x-www-form-urlencoded'
     })
-    puts "client_id: #{ENV['DISCORD_CLIENT_ID']}"
-    puts "client_secret: #{ENV['DISCORD_CLIENT_SECRET']}"
-    puts "code: #{params[:code]}"
-    puts "redirect_uri: #{discord_callback_url}"
 
     token_data = JSON.parse(token_response.body)
 
