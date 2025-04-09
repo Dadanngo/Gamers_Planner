@@ -28,3 +28,21 @@ services:
         fromDatabase:
           name: Gamers_PlannerDB
           property: connectionString
+
+  - type: cron
+    name: gamers-planner-cron
+    env: ruby
+    schedule: "0 8 * * *" # JST 17:00 = UTC 8:00
+    buildCommand: "bundle install"
+    startCommand: "bundle exec rake discord:save_schedule_and_notify"
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: DISCORD_BOT_TOKEN
+        sync: false
+      - key: SECRET_KEY_BASE
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gamers-planner-db
+          property: connectionString
