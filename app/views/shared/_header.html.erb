@@ -24,6 +24,16 @@
         <a href="<%= profile_path(@user) %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">マイページ（予定表一覧）</a>
       </li>
       <li>
+          <div class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+        <%# Discord連携のリンクを生成 %>
+            <% redirect_uri = Rails.env.production? ?
+                  "https://gamers-planner.onrender.com/discord/callback" :
+                  "http://localhost:3000/discord/callback" %>
+
+                  <%= link_to "Discordと連携", "https://discord.com/oauth2/authorize?client_id=#{ENV['DISCORD_CLIENT_ID']}&permissions=8&scope=bot+identify&redirect_uri=#{CGI.escape(redirect_uri)}&response_type=code", target: "_blank", rel: "noopener noreferrer" %>
+          </div>
+      </li>
+      <li>
         <p class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">アカウント設定変更</a>
       </li>
       <li>

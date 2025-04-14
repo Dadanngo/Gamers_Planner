@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'manual/show', to: 'manual#show', as: 'manual_show'
+  get 'kiyaku/term', to: 'kiyaku#term', as: 'kiyaku_term'
   get '/events/url/:url/schedule_inputs', to: 'schedule_inputs#index', as: 'event_schedule_inputs_by_url'
   get '/events/url/:url/schedule_inputs/:token/edit', to: 'schedule_inputs#edit', as: 'edit_event_schedule_input_by_url'
   patch '/events/url/:url/schedule_inputs/:token', to: 'schedule_inputs#update', as: 'update_event_schedule_input_by_url'
