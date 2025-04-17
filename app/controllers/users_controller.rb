@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_login, except: [ :new, :create, :show ]
-  skip_before_action :require_login, only: [ :new, :create ]
+  before_action :require_login, except: [ :new, :create, :show, :activate ]
+  skip_before_action :require_login, only: [ :new, :create, :activate ]
 
   # GET /users or /users.json
   def index
@@ -25,17 +25,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
       if @user.save
-        auto_login(@user)
-        flash[:notice] = "新規登録に成功しました"
-        format.html { redirect_to profile_path(@user) }
-        format.json { render :show, status: :created, location: @user }
+        UserMailer.activation_needed_email(@user).deliver_now
+        redirect_to root_path, notice: "確認メールを送信しました。メールアドレスを確認して下さい。"
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render :new, status: :unprocessable_entity
       end
-    end
   end
 
   def auto_login(user)
@@ -65,6 +60,22 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+def activate
+  user = User.load_from_activation_token(params[:id])
+  if user
+    user.activate!
+    user.reload
+    UserMailer.activation_success_email(user).deliver_now
+    auto_login(user)
+    flash[:notice] = "アカウント登録が完了しました！"
+    redirect_to root_path
+  else
+    flash[:alert] = "アクティベーションリンクが無効です。"
+    redirect_to root_path
+  end
+end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

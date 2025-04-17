@@ -4,7 +4,7 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = [ :core ]
+Rails.application.config.sorcery.submodules = [ :core, :user_activation ]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -346,13 +346,13 @@ Rails.application.config.sorcery.configure do |config|
     # How many seconds before the activation code expires. nil for never expires.
     # Default: `nil`
     #
-    # user.activation_token_expiration_period =
+    user.activation_token_expiration_period = 24 * 60 * 60
 
     # REQUIRED:
     # User activation mailer class.
     # Default: `nil`
-    #
-    # user.user_activation_mailer =
+
+    user.user_activation_mailer = UserMailer
 
     # When true, sorcery will not automatically
     # send the activation details email, and allow you to
@@ -369,13 +369,11 @@ Rails.application.config.sorcery.configure do |config|
 
     # Activation needed email method on your mailer class.
     # Default: `:activation_needed_email`
-    #
-    # user.activation_needed_email_method_name =
+    user.activation_needed_email_method_name =  :activation_needed_email
 
     # Activation success email method on your mailer class.
     # Default: `:activation_success_email`
-    #
-    # user.activation_success_email_method_name =
+    user.activation_success_email_method_name = :activation_success_email
 
     # Do you want to prevent users who did not activate by email from logging in?
     # Default: `true`
@@ -564,5 +562,4 @@ Rails.application.config.sorcery.configure do |config|
   # This line must come after the 'user config' block.
   # Define which model authenticates with sorcery.
   config.user_class = "User"
-  config.submodules = [ :core ]
 end

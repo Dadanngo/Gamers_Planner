@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_25_043908) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_16_082942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +84,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_25_043908) do
     t.string "discord_server_id"
     t.string "discord_channel_id"
     t.string "discord_user_id"
+    t.string "activation_state"
+    t.string "activation_token"
+    t.datetime "activation_token_expires_at"
   end
 
   add_foreign_key "data_centers", "games"
