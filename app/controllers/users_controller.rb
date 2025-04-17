@@ -26,7 +26,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
       if @user.save
-        UserMailer.activation_needed_email(@user).deliver_now
         redirect_to root_path, notice: "確認メールを送信しました。メールアドレスを確認して下さい。"
       else
         render :new, status: :unprocessable_entity
@@ -66,7 +65,6 @@ def activate
   if user
     user.activate!
     user.reload
-    UserMailer.activation_success_email(user).deliver_now
     auto_login(user)
     flash[:notice] = "アカウント登録が完了しました！"
     redirect_to root_path
