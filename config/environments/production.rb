@@ -77,7 +77,9 @@ Rails.application.configure do
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: "your-production-domain.com" }
+  config.action_mailer.default_url_options = {
+  host: "gamers-planner.onrender.com", protocol: "https"
+  }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
