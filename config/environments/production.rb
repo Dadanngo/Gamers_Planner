@@ -77,6 +77,18 @@ Rails.application.configure do
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: "your-production-domain.com" }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              ENV["MAIL_ADDRESS"],
+    port:                 ENV["MAIL_PORT"],
+    domain:               ENV["MAIL_DOMAIN"],
+    user_name:            ENV["MAIL_USER_NAME"],
+    password:             ENV["MAIL_PASSWORD"],
+    authentication:       ENV["MAIL_AUTHENTICATION"],
+    enable_starttls_auto: ENV["MAIL_ENABLE_STARTTLS_AUTO"] == "true"
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

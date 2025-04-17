@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
   root 'top#index'
-  resources :users, only: [ :show, :create, :new ]
+  resources :users, only: [ :show, :create, :new ] do
+    collection do
+      get :activate
+    end
+  end
   resource :login, only: %i[ new create ]
   resource :logout, only: %i[ show ]
   resources :notifications, only: [ :create ]
