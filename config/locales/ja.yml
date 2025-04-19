@@ -3,9 +3,17 @@ ja:
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
+        taken: "はすでに使用されています"
         restrict_dependent_destroy:
           has_one: "このレコードは削除できません。関連付けられた %{record} が存在します。"
           has_many: "このレコードは削除できません。関連付けられた %{record} が存在します。"
+    attributes:
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
+
   errors:
     format: "%{attribute} %{message}"
     messages:
@@ -15,10 +23,3 @@ ja:
       confirmation: "と%{attribute}の入力が一致しません"
       empty: "を入力してください"
       blank: "を入力してください"
-  activerecord:
-    attributes:
-      user:
-        name: "名前"
-        email: "メールアドレス"
-        password: "パスワード"
-        password_confirmation: "パスワード（確認）"

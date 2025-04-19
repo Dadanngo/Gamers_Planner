@@ -1,0 +1,18 @@
+<div style="background-image: url('<%= asset_path("back_ground.webp") %>');" class="bg-custom min-h-screen flex flex-col items-center pt-10 font-mplus">
+  <div class="divide-y bg-white w-full max-w-6xl mx-auto p-8 overflow-y-auto" style="max-height: calc(100vh - 160px);">  
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+      <h2 class="mt-6 text-3xl font-extrabold text-center text-black">パスワードリセット</h2>
+    </div>
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div class="px-4 py-8 sm:px-10 text-sm font-medium">
+        <%= form_with model: @user, url: password_reset_path(@token), method: :patch do |f| %>
+        <%= f.label :password, 'パスワード', class: "block text-2xl" %>
+        <%= f.password_field :password, class: "w-full p-3 border border-black rounded-lg" %>
+        <%= f.label :password_confirmation, 'パスワード（確認）', class: "block text-2xl" %>
+        <%= f.password_field :password_confirmation, class: "w-full p-3 border border-black rounded-lg" %>
+        <%= f.submit "再設定", class: "mt-4 px-4 py-2 bg-blue-500 text-white rounded" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   resource :login, only: %i[ new create ]
   resource :logout, only: %i[ show ]
+  resources :password_resets, only: %i[new create edit update]
   resources :notifications, only: [ :create ]
   resources :profiles, only: [ :show ]
   resources :events do
