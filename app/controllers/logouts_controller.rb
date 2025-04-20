@@ -1,4 +1,5 @@
 class LogoutsController < ApplicationController
+  skip_before_action :require_login
   def show
     logout
     flash[:notice] = "ログアウトしました"
