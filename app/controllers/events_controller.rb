@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  skip_before_action :require_login
   before_action :set_event, only: [ :recreate, :update_lobby_id ]
   def new
     @event = Event.new

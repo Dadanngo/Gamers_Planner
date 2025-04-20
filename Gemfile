@@ -66,3 +66,6 @@ gem "hashid-rails", "~> 1.0"
 gem 'discordrb', '~> 3.4'
 gem 'dotenv-rails'
 gem "whenever", require: false
+gem 'omniauth-google-oauth2'
+gem 'sorcery-oauth'
+gem 'omniauth-rails_csrf_protection'

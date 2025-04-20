@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   patch '/events/url/:url/update_lobby_id', to: 'events#update_lobby_id', as: 'update_lobby_id_event_by_url'
   get '/events/url/:url', to: 'events#show', as: 'event_by_url'
   get '/discord/callback', to: 'discord#callback'
+  get '/auth/:provider/callback', to: 'oauths#callback'
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
