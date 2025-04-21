@@ -4,7 +4,7 @@ namespace :discord do
     today = Time.zone.today
 
     # 通知を希望しているイベントを取得
-    events_to_notify = Event.joins(:notification).where(notifications: { notify_today: true })
+    events_to_notify = Event.joins(:notification).where(notifications: { notify_daily: true })
     if events_to_notify.empty?
       puts "通知対象のイベントがありません"
       next
@@ -71,9 +71,6 @@ namespace :discord do
           puts "ユーザーに Discord サーバーID が未設定です: User ID #{user&.id}"
         end
       end
-
-      # 通知済みにする
-      Notification.update_all(notify_today: false)
 
       bot.stop
     end

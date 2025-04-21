@@ -21,7 +21,7 @@
       <% end %>
     <% end %>
 
-    <div class="text-sm font-mplus flex items-center space-x-0.5 tracking-tight">
+    <div class="text-sm font-mplus flex items-center space-x-0.5 tracking-tight mt-2">
       <p class="text-green-500">・活動あり</p>
       <p class="text-red-500">・活動あるかも</p>
       <p class="text-black">・なし</p>
@@ -30,7 +30,7 @@
   <table class="border border-black mt-3 ">
     <thead>
       <tr class="bg-gray-200">
-        <th class="border border-black p-2 w-20 h-10 text-center text-sm">日付</th>
+        <th class="border border-black p-2 w-20 h-10 text-center text-xs">日付/player</th>
         <% @schedule_inputs.reject { |input| input.player_name.blank? }.each do |input| %>
           <th class="border border-black p-2 text-center w-10">
            <div class="font-bold text-xs">

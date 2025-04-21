@@ -4,42 +4,91 @@
       <%= image_tag 'logo.png', alt: 'GamersPlanner Logo', class: 'w-10 h-10 text-white p-2' %>
       <span class="ml-3 text-5xl Rajdhani font-black">Gamer's Planner</span>
     </a>
+
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center space-x-10">
-      <a class="mr-5 hover:text-gray-300 font-mplus" href="/manual/show">つかいかた</a>
-      <a class="mr-5 hover:text-gray-300 font-mplus" href="/events/new">予定を立てる</a>
-      <% if current_user.present? %>
-        <button id="dropdownDefaultButton" data-turbo="false" data-dropdown-toggle="dropdown" class="text-white bg-blue-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button"> MySettings 
-        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+      <!-- つかいかた -->
+      <a href="/manual/show" class="flex items-center space-x-1 hover:text-gray-300 font-mplus">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/>
         </svg>
+        <span>つかいかた</span>
+      </a>
+
+      <!-- 予定を立てる -->
+      <a href="/events/new" class="flex items-center space-x-1 hover:text-gray-300 font-mplus">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10m-10 4h6m4 8H5a2 2 0 01-2-2V7a2 2 0 012-2h14a2 2 0 012 2v13a2 2 0 01-2 2z"/>
+        </svg>
+        <span>予定を立てる</span>
+      </a>
+
+      <% if current_user.present? %>
+        <!-- MySettings -->
+        <button id="dropdownDefaultButton" data-turbo="false" data-dropdown-toggle="dropdown"
+                class="text-white bg-blue-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center space-x-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">
+          <span>MySettings</span>
+          <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 10 6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m1 1 4 4 4-4"/>
+          </svg>
         </button>
 
-    <!-- Dropdown menu -->
-    <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
-      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-      <li>
-        <a href="/" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ホーム</a>
-      </li>
-      <li>
-        <a href="<%= profile_path(@user) %>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">マイページ（予定表一覧）</a>
-      </li>
-      <li>
-          <div class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-        <%# Discord連携のリンクを生成 %>
-            <% redirect_uri = Rails.env.production? ?
-                  "https://gamers-planner.onrender.com/discord/callback" :
-                  "http://localhost:3000/discord/callback" %>
+        <!-- ドロップダウンメニュー -->
+        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+            <!-- ホーム -->
+            <li>
+              <a href="/" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75V21a1.5 1.5 0 01-1.5 1.5h-15A1.5 1.5 0 013 21V9.75z"/>
+                </svg>
+                <span>ホーム</span>
+              </a>
+            </li>
 
-                  <%= link_to "Discordと連携", "https://discord.com/oauth2/authorize?client_id=#{ENV['DISCORD_CLIENT_ID']}&permissions=8&scope=bot+identify&redirect_uri=#{CGI.escape(redirect_uri)}&response_type=code", target: "_blank", rel: "noopener noreferrer" %>
-          </div>
-      </li>
-      <li>
-        <a href="/logout" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">ログアウト</a>
-      </li>
-      </ul>
-    </div>
-        <% else %>
-        <a class="mr-5 hover:text-gray-300 font-mplus" href="/login/new">Login/Sign up</a>
+            <!-- マイページ -->
+            <li>
+              <a href="<%= profile_path(@user) %>" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M12 12a4.5 4.5 0 100-9 4.5 4.5 0 000 9z"/>
+                </svg>
+                <span>マイページ</span>
+              </a>
+            </li>
+
+            <!-- Discord連携 -->
+            <li>
+              <div class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              <svg class="w-5 h-5" viewBox="0 0 245 240" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M104.4 104.5c-5.7 0-10.2 5-10.2 11.1 0 6.1 4.6 11.1 10.2 11.1 5.7 0 10.3-5 10.2-11.1.1-6.1-4.5-11.1-10.2-11.1zm36.2 0c-5.7 0-10.2 5-10.2 11.1 0 6.1 4.6 11.1 10.2 11.1 5.7 0 10.3-5 10.2-11.1 0-6.1-4.5-11.1-10.2-11.1z"/>
+              <path d="M189.5 20h-134C38.9 20 20 38.9 20 60.5v119C20 201.1 38.9 220 60.5 220h134c21.6 0 39.5-18.9 39.5-40.5v-119C229 38.9 211.1 20 189.5 20zm-39.5 137.1s-3.7-4.4-6.8-8.3c13.5-3.8 18.6-12.2 18.6-12.2-4.2 2.7-8.2 4.6-11.8 5.9-5.1 2.2-10 3.7-14.8 4.6-9.8 1.8-18.8 1.3-26.6-.1-5.9-1.1-11-2.6-15.2-4.6-2.4-1.1-5.1-2.4-7.8-4.1-0.3-0.2-0.6-0.3-0.9-0.5-0.2-0.1-0.3-0.2-0.5-0.3-2.2-1.3-3.4-2.2-3.4-2.2s5 8.3 18.2 12.2c-3.1 3.9-6.9 8.5-6.9 8.5-22.8-0.7-31.5-15.7-31.5-15.7 0-33.3 14.9-60.3 14.9-60.3 14.9-11 29.1-10.7 29.1-10.7l1 1.2c-18.7 5.4-27.4 13.5-27.4 13.5s2.3-1.3 6.2-3.1c11.2-4.9 20-6.3 23.6-6.7 0.6-0.1 1.1-0.2 1.7-0.2 6.1-0.8 13-1 20.2-0.2 9.5 1.1 19.7 3.9 30.1 9.6 0 0-8.2-7.8-25.9-13.2l1.4-1.6s14.2-0.3 29.1 10.7c0 0 14.9 27 14.9 60.3 0.1 0-8.7 15-31.5 15.7z"/>
+              </svg>
+
+                <% redirect_uri = Rails.env.production? ? "https://gamers-planner.onrender.com/discord/callback" : "http://localhost:3000/discord/callback" %>
+                <%= link_to "Discordと連携", "https://discord.com/oauth2/authorize?client_id=#{ENV['DISCORD_CLIENT_ID']}&permissions=8&scope=bot+identify&redirect_uri=#{CGI.escape(redirect_uri)}&response_type=code", target: "_blank", rel: "noopener noreferrer", class: "text-sm" %>
+              </div>
+            </li>
+
+            <!-- ログアウト -->
+            <li>
+              <a href="/logout" class="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7"/>
+                </svg>
+                <span>ログアウト</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      <% else %>
+        <!-- Login / Sign up -->
+        <a href="/login/new" class="flex items-center space-x-1 hover:text-gray-300 font-mplus">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"/>
+          </svg>
+          <span>Login/Sign up</span>
+        </a>
       <% end %>
     </nav>
   </div>
