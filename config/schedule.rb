@@ -29,6 +29,6 @@ set :environment, rails_env
 set :output, 'log/cron.log'
 job_type :rake, "cd :path && RAILS_ENV=:environment PATH=/usr/local/bundle/bin:$PATH bundle exec rake :task --silent >> log/cron.log 2>&1"
 
-every 1.day, at: '17:00' do
+every 2.minutes do
   rake "discord:save_schedule_and_notify"
 end
