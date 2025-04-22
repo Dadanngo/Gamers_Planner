@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title><%= content_for?(:title) ? yield(:title) : "Gamer's Planner | ゲームの日程調整Webサービス" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Gamer's Plannerは、モンハンやFF14などのオンラインゲームの日程調整無料Webアプリです。ログインするとDiscord連携によるリマインド通知や予定の使い回しもできます。">
+    <meta name="keywords" content="ゲーム,日程調整,FF14,モンハン,スケジュール調整,Discord,gamersplanner,ff14日程調整,モンハン日程調整,ゲーム日程調整,予定">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D6XDH1GQ49"></script>
     <script>
