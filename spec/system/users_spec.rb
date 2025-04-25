@@ -51,8 +51,14 @@ RSpec.describe "Users", type: :system do
 
     it "githubにアクセスできる" do
       visit root_path
-      click_link "Github"
-      expect(page).to have_text("Gamers_Planner", wait: 5)
+
+      new_window = window_opened_by do
+        click_link "Github"
+      end
+
+      within_window new_window do
+        expect(page).to have_title(/Gamers_Planner/)
+      end
     end
  end
 
