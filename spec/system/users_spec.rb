@@ -20,7 +20,7 @@ RSpec.describe "Users", type: :system do
     it "つかいかたにアクセスできる" do
       visit root_path
       click_link "つかいかた"
-      expect(page).to have_content "主催者の方"
+      expect(page).to have_text("主催者の方", wait: 5)
     end
 
     it "予定を立てるにアクセスできる" do
@@ -52,7 +52,7 @@ RSpec.describe "Users", type: :system do
     it "githubにアクセスできる" do
       visit root_path
       click_link "Github"
-      expect(page).to have_content "Gamers_Planner"
+      expect(page).to have_text("Gamers_Planner", wait: 5)
     end
  end
 
