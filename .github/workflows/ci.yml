@@ -49,16 +49,6 @@ jobs:
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
-    
-      selenium:
-        image: selenium/standalone-chrome:latest
-        ports:
-          - 4444:4444
-        options: >-
-          --health-cmd "curl --silent --fail http://localhost:4444/wd/hub/status || exit 1"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 3      
 
       # redis:
       #   image: redis
@@ -83,9 +73,11 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
-          SELENIUM_DRIVER_URL: http://selenium:4444/wd/hub
           # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare && bundle exec rspec
+        run: bin/rails db:test:prepare
+
+      - name: Run rspec
+        run: bundle exec rspec  
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
