@@ -1,7 +1,7 @@
 <div style="background-image: url('<%= asset_path("back_ground.webp") %>');" class="bg-custom min-h-screen flex flex-col items-center pt-10 font-mplus">
   <div class="divide-y bg-white w-full max-w-6xl mx-auto p-8 overflow-y-auto" style="max-height: calc(100vh - 160px);">
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-      <div class="flex flex-col justify-center text-center lg:text-left lg:col-span-3">
+      <div class="flex flex-col text-left lg:text-left lg:col-span-3">
         <div class="flex items-center justify-start">
           <span class="text-xl font-bold md:text-2xl">主催者の方</span>
           <%= link_to manual_show_path(button1: true), method: :get, class: 'ml-4 p-0 border-0 bg-transparent' do %>
@@ -12,12 +12,12 @@
           <% end %>
         </div>
         <% if @show_details_1 %>
-          <span class="mt-4 text-black text-xs sm:text-base">1.<a href="/events/new" class="text-blue-500 underline">予定を立てる</a>を押し、STEP1をプルダウンから選択してください。</span>
-          <span class="mt-4 text-black text-xs sm:text-base">2.次にカレンダーから候補日にしたい日付を選択し、</span>
+          <span class="mt-4 text-black text-xs sm:text-base">①<a href="/events/new" class="text-blue-500 underline">予定を立てる</a>を押し、STEP1をプルダウンから選択してください。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">②次にカレンダーから候補日にしたい日付を選択し、</span>
            <span class="text-black text-xs sm:text-base">開始時間を編集してください。</span>
           <span class="mt-4 text-black text-xs sm:text-base">日程候補から指定した日付を編集可能（複数選択可能）</span>
            <%= image_tag "manual_1.png", class: "w-50 h-50 object-cover" %>
-          <span class="mt-4 text-black text-xs sm:text-base">3.登録をボタンを押すと予定表URLが出力されますので、</span>
+          <span class="mt-4 text-black text-xs sm:text-base">③登録をボタンを押すと予定表URLが出力されます。</span>
           <span class="text-black text-xs sm:text-base">参加者へ送信してください。</span>
           <%= image_tag "manual_2.png", class: "w-50 h-50 object-cover" %>
         <% end %>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-      <div class="flex flex-col justify-center text-center lg:text-left lg:col-span-3">
+      <div class="flex flex-col justify-center lg:text-left lg:col-span-3">
         <div class="flex items-center justify-start">
           <span class="text-xl font-bold md:text-2xl">参加者の方</span>
           <%= link_to manual_show_path(button2: true), method: :get, class: 'ml-4 p-0 border-0 bg-transparent' do %>
@@ -36,20 +36,20 @@
           <% end %>
         </div>
         <% if @show_details_2 %>
-          <span class="mt-4 text-black text-xs sm:text-base">1.予定追加を押す。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">①予定追加を押す。</span>
             <%= image_tag "manual_3.png", class: "w-[300px] h-[250px] object-cover" %>
-          <span class="mt-4 text-black text-xs sm:text-base">2. プレイヤー名と、ジョブ名や使用武器をプルダウンから選択して下さい。</span>
-            <span class="mt-4 text-black text-xs sm:text-base">3. 自分の活動可能日程を〇✕△で選択して下さい。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">②プレイヤー名と、ジョブ名や使用武器をプルダウンから選択して下さい。</span>
+            <span class="mt-4 text-black text-xs sm:text-base">③自分の活動可能日程を〇✕△で選択して下さい。</span>
             <span class="mt-4 text-black text-xs sm:text-base">（△で参加が微妙な場合は備考記入欄へ記入。あわせてプレイヤー名も記入する。）</span>
             <%= image_tag "manual_4.png", class: "w-50 h-50 object-cover" %>
-          <span class="mt-4 text-black text-xs sm:text-base">4.登録ボタンを押して、日程入力完了です。予定を変更したい場合は、作成された予定表のプレイヤー名をクリックしてください。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">④登録ボタンを押して、日程入力完了です。予定を変更したい場合は、作成された予定表のプレイヤー名をクリックしてください。</span>
             <%= image_tag "manual_5.png", class: "w-[300px] h-[150px] object-cover" %>
         <% end %>
       </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-      <div class="flex flex-col justify-center text-center lg:text-left lg:col-span-3">
+      <div class="flex flex-col justify-center lg:text-left lg:col-span-3">
         <div class="flex items-center justify-start">
           <span class="text-xl font-bold md:text-2xl">DISCORD通知方法</span>
           <%= link_to manual_show_path(button3: true), method: :get, class: 'ml-4 p-0 border-0 bg-transparent' do %>
@@ -61,20 +61,21 @@
         </div>
         <% if @show_details_3 %>
           <span class="mt-4 text-black text-xs sm:text-base">DiscordBotを導入する事によって活動日当日の17時に当日の活動有無を通知する事が可能です。</span>
-          <span class="text-black text-xs sm:text-base">※1つのアカウントにつき、1つのDiscordサーバーと連携します。</span>
+          <span class="text-black text-xs text-red-500 sm:text-base">※1つのアカウントにつき、1つのDiscordサーバーと連携します。</span>
           <span class="text-black text-xs sm:text-base">誤って招待した場合や他のサーバーで新規に通知したい場合は、botをキック後に下記手順に従い再度Bot連携して下さい。</span>
           <br>
-          <span class="mt-4 text-black text-xs sm:text-base">1.当サービスログイン後、下部「Bot連携」ボタンを押し、DICORDで日程を通知したいサーバーを選択後、</span>
+          <span class="mt-4 text-black text-xs sm:text-base">①当サービスログイン後、下部「Bot連携」ボタンを押し、DICORDで日程を通知したいサーバーを選択後、</span>
           <span class="text-black text-xs sm:text-base">指示に沿って認証をしてください。（サーバー管理者の方は、Botを招待する権限が必要です。）</span>
           <%= image_tag "manual_6.png", class: "w-[300px] h-[250px] object-cover" %>
-          <span class="mt-4 text-black text-xs sm:text-base">2.Discordに移動し、通知を送信したいチャンネルで「!set_channel」をメッセージで送信してください。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">②Discordに移動し、通知を送信したいチャンネルで「!set_channel」をメッセージで送信してください。</span>
           <span class="text-black text-xs sm:text-base">設定が正常に完了すると、botが反応します。</span>
            <%= image_tag "manual_7.png", class: "object-cover" %>
-          <span class="mt-4 text-black text-xs sm:text-base">3.予定表から全員の入力を確認後に、DISCORDで通知ボタンを押す。</span>
+          <span class="mt-4 text-black text-xs sm:text-base">③予定表から全員の入力を確認後に、DISCORDで通知ボタンを押す。</span>
            <%= image_tag "manual_8.png", class: "object-cover" %>
-          <span class="mt-4 text-black text-xs sm:text-base">4.サーバー内で活動日のリマインドがされます!</span>
+          <span class="mt-4 text-black text-xs sm:text-base">④サーバー内で当日の17時に活動の有無がリマインド!</span>
+          <%= image_tag "manual_9.png", class: "object-cover" %>
            <div class="flex justify-end">
-              <button class="relative h-12 overflow-hidden rounded bg-blue-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-blue-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2">
+              <button class="relative h-12 overflow-hidden rounded bg-blue-400 px-5 py-2.5 text-white transition-all duration-300 hover:bg-blue-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2 mt-2">
                <% if current_user %>
                  <% redirect_uri = Rails.env.production? ?
                   "https://gamers-planner.onrender.com/discord/callback" :
