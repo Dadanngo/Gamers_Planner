@@ -107,8 +107,9 @@
       <% end %>
     </tbody>
   </table>
-
-  <% if @user %>
+  
+   <!--Discord連携できているユーザーのみ通知を出力 -->
+  <% if @user&.discord_user_id.present? %>
   <%= button_to "Discord通知する", notifications_path(event_id: @event.id), method: :post, class: "flex justify-center mt-3 btn btn-primary overflow-hidden rounded bg-lime-400 text-white transition-all duration-300 hover:bg-lime-500 hover:ring-2 hover:ring-neutral-800 hover:ring-offset-2" %>
   <% end %>
 

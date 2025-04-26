@@ -2,8 +2,8 @@
 <div style="background-image: url('<%= asset_path("back_ground.webp") %>');" class="bg-custom h-screen flex items-center justify-center relative">
   <%#= ブルーバックグラウンドしてtailamimisaエフェクト適用 %>
  <div style="background: linear-gradient(to right, #06b6d4, #3b82f6)" class="text-white p-4 font-mplus animate-scale-up-hor-left text-left absolute top-[10%] transform -translate-y-[10%]">
-  <h1 class="text-white text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-mplus">ゲームプレイヤー同士の</h1>
-  <h1 class="text-white text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-mplus">予定作成に特化した</h1>
+  <h1 class="text-white text-3xl sm:text-3xl md:text-6xl lg:text-7xl font-mplus">ゲームプレイヤー同士の</h1>
+  <h1 class="text-white text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-mplus">予定作成に特化した</h1>
   <br>
   <h1 class="text-white text-4xl sm:text-4xl md:text-6xl lg:text-8xl font-mplus">日程調整サービス。</h1>
   <br>
@@ -16,15 +16,16 @@
     </div>
   </div>
 <%# キャラクターと吹き出しを左下に配置 %>
-  <div class="fixed bottom-32 left-4 flex flex-col items-start z-50">
-    <%# 吹き出し部分 %>
-    <div class="relative bg-yellow-100 text-black p-3 rounded-lg shadow-lg max-w-xs z-50 animate-wiggle ">
-      <p class="text-sm font-semibold">✅モンハンとFF14対応！</p>
-      <p class="text-sm font-semibold">✅ログインすると日程をDiscord通知可能！</p>
+<div class="fixed bottom-4 sm:bottom-32 left-2 sm:left-4 flex flex-col items-start z-50">
+  <%# 吹き出し部分 %>
+  <div class="relative bg-yellow-100 text-black p-2 sm:p-3 rounded-lg shadow-lg max-w-[180px] sm:max-w-xs z-50 animate-wiggle">
+    <p class="text-xs sm:text-sm font-semibold">✅モンハンとFF14対応！</p>
+    <p class="text-xs sm:text-sm font-semibold">✅ログインすると日程をDiscord通知可能！</p>
+
     <%# 吹き出しの三角形 %>
     <div class="absolute -bottom-3 left-4 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-yellow-100"></div>
   </div>
-    <%# キャラクター画像 %>
-    <%= image_tag "character_2.png", class: "w-40 h-40 object-cover z-50  animate-wiggle" %>
-  </div>
+
+  <%# キャラクター画像 %>
+  <%= image_tag "character_2.png", class: "w-28 h-28 sm:w-40 sm:h-40 object-cover z-50 animate-wiggle" %>
 </div>
