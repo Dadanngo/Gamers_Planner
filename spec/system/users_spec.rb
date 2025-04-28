@@ -20,6 +20,8 @@ RSpec.describe "Users", type: :system do
     it "つかいかたにアクセスできる" do
       visit root_path
       click_link "つかいかた"
+
+      expect(page).to have_current_path(manual_show_path, wait: 5)
       expect(page).to have_text("Manuals", wait: 5)
     end
 
