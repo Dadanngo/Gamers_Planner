@@ -3,9 +3,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("ロビーID編集スクリプト読み込み完了");
 
-    var display = document.getElementById("lobby-id-display");
-    var input = document.getElementById("lobby-id-input");
-    var saveButton = document.getElementById("lobby-id-save"); 
+    const display = document.getElementById("lobby-id-display");
+    const input = document.getElementById("lobby-id-input");
+    const saveButton = document.getElementById("lobby-id-save"); 
     
     if (!display || !input || !saveButton) return;
 
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //値を保存する処理。Railsと連携するための非同期通信 (fetch API + PATCH リクエスト)
     saveButton.addEventListener("click", function() {
-        var newValue = input.value;
+        const newValue = input.value;
 
         fetch(display.dataset.updateUrl, {
             method: "PATCH",
