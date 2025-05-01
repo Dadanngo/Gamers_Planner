@@ -20,7 +20,7 @@ RSpec.describe "Users", type: :system do
 
     it "つかいかたにアクセスできる" do
       visit root_path
-      click_link "つかいかた"
+      find('a[href="/manual/show"]').click
 
       expect(page).to have_current_path(manual_show_path, wait: 5)
       expect(page).to have_text("Manuals", wait: 5)
@@ -75,6 +75,7 @@ RSpec.describe "Users", type: :system do
       fill_in "メールアドレス", with: user.email
       fill_in "パスワード", with: "password"
       click_button "ログイン"
+      expect(page).to have_current_path(root_path, wait: 5)
       expect(page).to have_content("ログインしました")
     end
 

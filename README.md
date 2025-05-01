@@ -30,10 +30,11 @@
 - [🤖 Discord連携機能](#-discord連携機能)
 
 技術構成について
-- [⚙️ 使用した技術](#使用した技術)
-- [✏️ ER図](#ER図)
-- [✏️ 画面遷移図](#画面遷移図)
+- [💻 使用した技術](#-使用した技術)
+- [📊 ER図](#-ER図)
+- [📖 画面遷移図](#-画面遷移図)
 
+ [✅ 今後実装したい機能](#-今後実装したい機能)
 
 ### 🔐 ユーザー登録機能
 [![Image from Gyazo](https://i.gyazo.com/7cc5cdb94d2636b580f26625d8ce2143.jpg)](https://gyazo.com/7cc5cdb94d2636b580f26625d8ce2143)
@@ -114,9 +115,9 @@ https://gamersplanner.com/manual/show?button3=true
 🔄 連携・通知までの流れ
 
 
-1. 「MySettings」or「つかいかた」からBot導入ページへ移動し、サーバーへBotを招待
+1. 「MySettings」or「つかいかた」からBot導入ページへ移動し、サーバーへBotを招待。
 
-2. 通知したいチャンネルでコマンドを実行
+2. 通知したいチャンネルでコマンドを実行。
 ```
 !set_channel
 ```
@@ -128,7 +129,7 @@ https://gamersplanner.com/manual/show?button3=true
 
 [![Image from Gyazo](https://i.gyazo.com/bd4684f227d321bc477fca6bbcbdbcd0.png)](https://gyazo.com/bd4684f227d321bc477fca6bbcbdbcd0)
 
-## ⚙️ 使用した技術
+## 💻 使用した技術
 
 | カテゴリー | 技術内容 |
 |:-----------|------------:|
@@ -141,8 +142,14 @@ https://gamersplanner.com/manual/show?button3=true
 | バージョン管理    | Github     |
 
 
-## ✏️ ER図
+### 📊 ER図
 [![Image from Gyazo](https://i.gyazo.com/8438f5a34fe30d5b4ef0e10c924743b9.png)](https://gyazo.com/8438f5a34fe30d5b4ef0e10c924743b9)
 
-## ✏️ 画面遷移図
+### 📖 画面遷移図
 https://www.figma.com/design/qZTFAiLOH5aGPKNGJSBp0W/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&p=f&t=f09naTtaamxiLoLY-0
+
+
+### ✅ 今後実装したい機能
+・Discordbotを使用した日程調整未入力者へのリマインド機能
+
+・参加者が予定を追加・編集したときに主催者にメール通知する機能
