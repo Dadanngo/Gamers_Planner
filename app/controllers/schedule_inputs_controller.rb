@@ -5,6 +5,7 @@ class ScheduleInputsController < ApplicationController
 
     def new
       @schedule_input = @event.schedule_inputs.find_by(token: params[:token])
+      # トークンが存在する場合は、該当の入力があるか確認。ない場合は新規作成
       if @schedule_input.nil?
         @schedule_input = @event.schedule_inputs.new
         @schedule_input.token = SecureRandom.hex(16)
@@ -16,12 +17,13 @@ class ScheduleInputsController < ApplicationController
 
     def create
       @schedule_input = @event.schedule_inputs.new(schedule_input_params.except(:event_time_id))
-      # URLトークン作成
+      # URLトークン作成。event_time_id以外のパラメータでスケジュール入力を初期化
       @schedule_input.token = SecureRandom.hex(16)
       # JSONに変換
       @schedule_input.response = schedule_input_params[:response].to_json
+      # フォームで受け取った各時間帯の可否（◯△✕など）をJSONで保存。
       @schedule_input.comment = schedule_input_params[:comment].values.any?(&:present?) ? schedule_input_params[:comment].to_json : nil
-
+      # コメントがある場合はJSONで保存。なければnil
       @schedule_input.event_time_id = schedule_input_params[:event_time_id].values.first.to_i if schedule_input_params[:event_time_id].present?
 
       if @schedule_input.save
@@ -34,7 +36,7 @@ class ScheduleInputsController < ApplicationController
 
     def index
       @event = Event.find_by(url: params[:url])
-
+      # URLからイベントを特定し、関連する全参加者の入力を一覧で取得。
       unless @event
         flash[:alert] = "イベントが見つかりません。"
         redirect_to root_path and return
@@ -46,7 +48,7 @@ class ScheduleInputsController < ApplicationController
 
     def edit
       @event = Event.find_by(url: params[:url]) # URLでイベントを取得
-      @schedule_input = @event.schedule_inputs.find_by(token: params[:token])
+      @schedule_input = @event.schedule_inputs.find_by(token: params[:token]) # 編集対象の入力を取得
     end
 
     def update

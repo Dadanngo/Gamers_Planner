@@ -23,7 +23,7 @@
 
     <div class="text-sm font-mplus flex items-center space-x-0.5 tracking-tight mt-2">
       <p class="text-green-500">・活動あり</p>
-      <p class="text-red-500">・活動あるかも</p>
+      <p class="text-yellow-200">・活動あるかも</p>
       <p class="text-black">・なし</p>
     </div>
 
@@ -54,9 +54,9 @@
           # 背景色を決定
           bg_color = case
             when responses_for_time.empty? { |r| r ==" " } then "bg-white" # 全員未入力
-            when responses_for_time.all? { |r| r == "ok" } then "bg-green-200" # 全員〇
+            when responses_for_time.all? { |r| r == "ok" } then "bg-green-100" # 全員〇
             when responses_for_time.include?("ng") then "bg-white" # ✕がいる
-            when responses_for_time.all? { |r| r == "ok" || r == "maybe" } then "bg-red-200" # 〇と△のみ
+            when responses_for_time.all? { |r| r == "ok" || r == "maybe" } then "bg-yellow-100" # 〇と△のみ
             else ""
           end
         %>
