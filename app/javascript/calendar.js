@@ -3,6 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import jaLocale from '@fullcalendar/core/locales/ja';
 
+// FullCalendarの初期化。日付がクリックされるとhandleDateClickが呼ばれる。
 export function initializeCalendar() {
     let calendarEl = document.getElementById('calendar');
     if (calendarEl) {
@@ -23,12 +24,13 @@ function handleDateClick(info) {
     let dateCandidates = document.getElementById('date_candidates');
     let form = document.querySelector('form');
 
+    //クリックされた日付を「月/日 (曜日)」形式に整形
     let date = new Date(info.dateStr);
     let dateStr = `${date.getMonth() + 1}/${date.getDate()} (${['日', '月', '火', '水', '木', '金', '土'][date.getDay()]})`;
-
     let defaultTime = "00:00";
     let dateTimeStr = `${dateStr} ${defaultTime}`;
 
+    // すでに同じ日付が存在するか確認
     let index = document.querySelectorAll('.date-group .dates input[type="hidden"]').length;
 
     let existingCandidate = dateCandidates.querySelector('.date-group');
@@ -37,7 +39,8 @@ function handleDateClick(info) {
         existingCandidate.className = 'p-4 border border-gray-300 rounded-md date-group';
         dateCandidates.appendChild(existingCandidate);
     }
-
+    
+    // 実際に日付を並べる子要素コンテナ
     let existingDatesContainer = existingCandidate.querySelector('.dates');
     if (!existingDatesContainer) {
         existingDatesContainer = document.createElement('div');
