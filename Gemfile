@@ -72,3 +72,5 @@ gem "whenever", require: false
 gem 'omniauth-google-oauth2'
 gem 'sorcery-oauth'
 gem 'omniauth-rails_csrf_protection'
+gem 'kaminari'
+gem 'kaminari-tailwind'
