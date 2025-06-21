@@ -4,7 +4,8 @@ class ProfilesController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @events = Event.where(user_id: @user.id).includes(:event_times)
+    @events = Event.where(user_id: @user.id).includes(:event_times).page(params[:page]).per(10)
+    @events_count = @user.events.count
   end
 
   def edit
