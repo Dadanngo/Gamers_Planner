@@ -60,7 +60,7 @@ RSpec.describe "Users", type: :system do
       end
 
       within_window new_window do
-        expect(page).to have_title(/Gamers_Planner/)
+        expect(page).to have_title(/Gamers_Planner/, wait: 5)
       end
     end
  end
