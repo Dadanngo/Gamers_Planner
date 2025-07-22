@@ -74,3 +74,7 @@ gem 'sorcery-oauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'kaminari'
 gem 'kaminari-tailwind'
+gem "nokogiri", ">= 1.18.9"
+gem "jquery-ui-rails", ">= 8.0.0"
+gem "rack", ">= 3.1.16"
+gem "thor", ">= 1.4.0"
