@@ -41,7 +41,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "brakeman", require: false
+  gem "brakeman", ">= 7.1.0", require: false
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
@@ -74,3 +74,7 @@ gem 'sorcery-oauth'
 gem 'omniauth-rails_csrf_protection'
 gem 'kaminari'
 gem 'kaminari-tailwind'
+gem "nokogiri", ">= 1.18.9"
+gem "jquery-ui-rails", ">= 8.0.0"
+gem "rack", ">= 3.1.16"
+gem "thor", ">= 1.4.0"
